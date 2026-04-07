@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>My Profile</h1>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ user.username }}</h5>
+                    <p class="card-text">
+                        <strong>Email:</strong> {{ user.email|default:"Not provided" }}<br>
+                        <strong>Joined:</strong> {{ user.date_joined|date:"F d, Y" }}
+                    </p>
+                    <a href="{% url 'orders:order_list' %}" class="btn btn-outline-primary btn-sm">My Orders</a>
+                    <a href="{% url 'accounts:logout' %}" class="btn btn-outline-danger btn-sm">Logout</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Account Information</h4>
+                </div>
+                <div class="card-body">
+                    <p><strong>Username:</strong> {{ user.username }}</p>
+                    <p><strong>Email:</strong> {{ user.email|default:"Not provided" }}</p>
+                    <p><strong>First Name:</strong> {{ user.first_name|default:"Not provided" }}</p>
+                    <p><strong>Last Name:</strong> {{ user.last_name|default:"Not provided" }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

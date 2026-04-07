@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Checkout</h1>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <h3>Shipping Information</h3>
+            <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label>First Name</label>
+                        <input type="text" name="first_name" class="form-control" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Last Name</label>
+                        <input type="text" name="last_name" class="form-control" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Phone</label>
+                        <input type="text" name="phone" class="form-control" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label>Address</label>
+                    <textarea name="address" class="form-control" rows="2" required></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label>City</label>
+                        <input type="text" name="city" class="form-control" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>State</label>
+                        <input type="text" name="state" class="form-control" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Postal Code</label>
+                        <input type="text" name="postal_code" class="form-control" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label>Country</label>
+                    <input type="text" name="country" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-success btn-lg">Place Order</button>
+            </form>
+        </div>
+        
+        <div class="col-md-4">
+            <h3>Order Summary</h3>
+            <div class="card">
+                <div class="card-body">
+                    {% for item in cart %}
+                    <div class="d-flex justify-content-between">
+                        <span>{{ item.product.name }} x {{ item.quantity }}</span>
+                        <span>${{ item.total_price }}</span>
+                    </div>
+                    {% endfor %}
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <strong>Total:</strong>
+                        <strong>${{ cart.get_total_price }}</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

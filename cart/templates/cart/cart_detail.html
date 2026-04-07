@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Shopping Cart{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Shopping Cart</h1>
+    
+    {% if not cart %}
+    <div class="alert alert-info">
+        Your cart is empty. <a href="{% url 'products:product_list' %}">Continue shopping</a>
+    </div>
+    {% else %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart %}
+            <tr>
+                <td>
+                    <a href="{{ item.product.get_absolute_url }}">
+                        {{ item.product.name }}
+                    </a>
+                </td>
+                <td>${{ item.price }}</td>
+                <td>
+                    <form method="post" action="{% url 'cart:update_cart' item.product.id %}" class="d-flex">
+                        {% csrf_token %}
+                        <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control" style="width: 70px;">
+                        <button type="submit" class="btn btn-sm btn-secondary ms-2">Update</button>
+                    </form>
+                </td>
+                <td>${{ item.total_price }}</td>
+                <td>
+                    <form method="post" action="{% url 'cart:remove_from_cart' item.product.slug %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                <td><strong>${{ cart.get_total_price }}</strong></td>
+                <td>
+                    <form method="post" action="{% url 'cart:clear_cart' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-warning">Clear Cart</button>
+                    </form>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    
+    <div class="d-flex justify-content-between mt-4">
+        <a href="{% url 'products:product_list' %}" class="btn btn-outline-primary">Continue Shopping</a>
+        <a href="{% url 'orders:checkout' %}" class="btn btn-primary">Proceed to Checkout</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

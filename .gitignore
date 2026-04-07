@@ -1,0 +1,62 @@
+# Python byte-compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Dataset files
+data/
+*.csv
+*.h5
+*.hdf5
+*.zip
+*.tar.gz
+
+# Model files (except specific ones in root)
+models/
+checkpoints/
+
+# Recordings
+*.avi
+*.mp4
+*.mov
+recording_*.avi
+
+# Kaggle credentials
+.kaggle/
+kaggle.json
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+logs/
+*.log
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# TensorFlow
+*.pb
+saved_model/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
