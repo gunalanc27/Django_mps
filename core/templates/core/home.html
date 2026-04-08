@@ -26,7 +26,10 @@
                     <h5 class="card-title">{{ product.name }}</h5>
                     <p class="card-text text-primary fw-bold">${{ product.price }}</p>
                     <a href="{{ product.get_absolute_url }}" class="btn btn-sm btn-outline-primary">View</a>
-                    <a href="{{ product.get_add_to_cart_url }}" class="btn btn-sm btn-primary">Add to Cart</a>
+                    <form method="post" action="{{ product.get_add_to_cart_url }}" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-primary">Add to Cart</button>
+                    </form>
                 </div>
             </div>
         </div>

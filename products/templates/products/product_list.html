@@ -52,7 +52,10 @@
                             <p class="card-text text-muted">{{ product.category.name }}</p>
                             <p class="card-text"><strong>${{ product.price }}</strong></p>
                             <a href="{{ product.get_absolute_url }}" class="btn btn-outline-primary btn-sm">View Details</a>
-                            <a href="{{ product.get_add_to_cart_url }}" class="btn btn-primary btn-sm">Add to Cart</a>
+                            <form method="post" action="{{ product.get_add_to_cart_url }}" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary btn-sm">Add to Cart</button>
+                            </form>
                         </div>
                     </div>
                 </div>
