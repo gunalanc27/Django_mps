@@ -8,73 +8,87 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
+
 """
 
-import os
-from pathlib import Path
-from dotenv import load_dotenv
 
-load_dotenv()
+import os # load the os module
+from pathlib import Path # load the path
+from dotenv import load_dotenv # load the dotenv
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv() 
 
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-change-me-in-production")
+BASE_DIR = Path(__file__).resolve().parent.parent # getting the dir from the productio na dnthe dvlopemenr 
 
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-change-me-in-production") # secturt key used for the https i think 
 
-ALLOWED_HOSTS = ["*"]
+DEBUG = os.environ.get("DEBUG", "False") == "True" # why is it true 
+
+ALLOWED_HOSTS = ["*"] # no issue since im at the testing 
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
-    "accounts",
-    "core",
-    "products",
-    "cart",
-    "orders",
-    "reviews",
+    "django.contrib.admin" , # for creating and manage the users
+    "django.contrib.auth" , # controlling the usets
+    "django.contrib.contenttypes" , # for genric refrence to the db 
+    "django.contrib.sessions" , # for manageing the sessions  
+    "django.contrib.messages" , # for sending the messages to the users 
+    "django.contrib.staticfiles" , # fir servingt he static files to theclint (is it include the temolate too )
+    "accounts" ,
+    "core" ,
+    "products" ,
+    "cart" ,
+    "orders" ,
+    "reviews" ,
 ]
+
+
+
 
 MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
-]
+    "django.middleware.security.SecurityMiddleware", # secuirty middle ware for handling http->https convertion
+    "whitenoise.middleware.WhiteNoiseMiddleware", # for serviceing the sttac file on the production 
+    "django.contrib.sessions.middleware.SessionMiddleware", # session handler 
+    "django.middleware.common.CommonMiddleware",  #utitlity middle ware 
+    "django.middleware.csrf.CsrfViewMiddleware", # for validating each of the request 
+    "django.contrib.auth.middleware.AuthenticationMiddleware", #for auth 
+    "django.contrib.messages.middleware.MessageMiddleware", # for messages 
+    "django.middleware.clickjacking.XFrameOptionsMiddleware", # for making sure i can't add this web inside a another web 
+] # now my question does the order in which we do the middleware cause any issue 
 
+
+
+# for managignt he main urs
 ROOT_URLCONF = "Vajra.urls"
 
+
+
+# what does this do 
+# this does the following that  is this tells the django where to find the templates 
 TEMPLATES = [
     {
-        "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
-        "APP_DIRS": True,
-        "OPTIONS": {
+        "BACKEND": "django.template.backends.django.DjangoTemplates" ,
+        "DIRS": [BASE_DIR / "templates"] ,# tell to look inside the templates ininside each of the folder
+        "APP_DIRS": True , # tell to look inside the templates ininside each of the folder
+        "OPTIONS": { # what dara are injectted to each of the temolated by default 
             "context_processors": [
-                "django.template.context_processors.request",
-                "django.contrib.auth.context_processors.auth",
-                "django.contrib.messages.context_processors.messages",
-                "cart.cart.cart_context",
-            ],
-        },
-    },
+                "django.template.context_processors.request" ,
+                "django.contrib.auth.context_processors.auth" ,
+                "django.contrib.messages.context_processors.messages" ,
+                "cart.cart.cart_context" ,
+            ] ,
+        } ,
+    } ,
 ]
 
+# for tellin which applcaion are we using 
 WSGI_APPLICATION = "Vajra.wsgi.application"
 
 
-import dj_database_url
+
+import dj_database_url 
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
@@ -89,6 +103,7 @@ if DATABASE_URL:
             conn_health_checks=True,
         )
     }
+
 else:
     # Fallback to SQLite for local development
     DATABASES = {
@@ -97,7 +112,7 @@ else:
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
-
+# session engine + other things 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SECURE = True
