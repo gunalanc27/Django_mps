@@ -4,8 +4,8 @@ from products.models import Product, Category
 
 
 def home(request):
-    products = Product.objects.filter(is_available=True)[:8]
-    categories = Category.objects.all()[:6]
+    products = Product.objects.filter(is_active=True).order_by("-average_rating")[:8]
+    categories = Category.objects.filter(is_active=True)[:6]
     return render(request, "core/home.html", {
         "products": products,
         "categories": categories

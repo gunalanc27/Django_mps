@@ -9,23 +9,25 @@ from products.models import Product
 @login_required
 def add_review(request, product_slug):
     product = get_object_or_404(Product, slug=product_slug)
-    
+
     if request.method == "POST":
         rating = request.POST.get("rating")
+        title = request.POST.get("title", "")
         comment = request.POST.get("comment")
-        
+
         if Review.objects.filter(product=product, user=request.user).exists():
             messages.error(request, "You have already reviewed this product")
             return redirect(product.get_absolute_url())
-        
+
         Review.objects.create(
             product=product,
             user=request.user,
             rating=rating,
-            comment=comment
+            title=title,
+            comment=comment,
         )
-        messages.success(request, "Review added successfully!")
-    
+        messages.success(request, "Review submitted! It will appear after approval.")
+
     return redirect(product.get_absolute_url())
 
 

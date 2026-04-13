@@ -32,7 +32,7 @@
             <ul class="menu menu-horizontal px-1 gap-2">
                 <li><a href="{% url 'core:home' %}" class="font-semibold {% if request.resolver_match.url_name == 'home' %}text-primary{% endif %}">Home</a></li>
                 <li><a href="{% url 'products:product_list' %}" class="font-semibold">Products</a></li>
-                <li><a href="#" class="font-semibold">Offers</a></li>
+                <!-- <li><a href="#" class="font-semibold">Offers</a></li> -->
                 <li><a href="{% url 'core:about' %}" class="font-semibold">About</a></li>
                 <li><a href="{% url 'core:contact' %}" class="font-semibold">Contact</a></li>
             </ul>
