@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 ~
-{% block title %}Home - Your Shop Name{% endblock %}
+{% block title %}Home - GPZ Store{% endblock %}
 
 {% block content %}
 <!-- Hero Section -->
@@ -16,12 +16,12 @@
                 </div>
                 
                 <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
-                    Your Shop Name<br/>
-                    <span class="text-yellow-300 font-black">Quality Products</span>
+                    GPZ Store<br/>
+                    <span class="text-yellow-300 font-black">Level Up Your Game</span>
                 </h1>
                 
                 <p class="text-lg lg:text-xl text-white/80 max-w-lg leading-relaxed font-medium">
-                    Discover amazing products across Electronics, Fashion, Home Decor, Sports, and Beauty categories. Shop the latest arrivals with exclusive offers!
+                    The ultimate destination for premium gaming gear. From next-gen consoles to precision controllers, we bring you the tools to dominate.
                 </p>
                 
                 <div class="flex flex-wrap gap-4 pt-4">
@@ -64,7 +64,7 @@
                 <div class="space-y-2">
                     <h3 class="text-2xl font-extrabold tracking-tight">Latest Trends</h3>
                     <p class="text-base-content/60 text-base leading-relaxed max-w-xs mx-auto">
-                        Stay updated with the newest products and fashion trends across the globe.
+                        Stay ahead with the newest hardware and limited edition gaming gear.
                     </p>
                 </div>
             </div>
@@ -109,7 +109,7 @@
 </section>
 
 <!-- Featured Products Section -->
-{% if products %}
+<!-- {% if products %}
 <section class="py-32 bg-base-200/40">
     <div class="container mx-auto px-6">
         <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
@@ -142,8 +142,8 @@
                     </div>
                     {% endif %}
                     
-                    <!-- Quick add / Discount badge could go here -->
-                    <div class="absolute top-6 left-6">
+                 Quick add / Discount badge could go here -->
+                    <!-- <div class="absolute top-6 left-6">
                         <div class="badge badge-primary py-3 px-4 rounded-xl font-bold border-none shadow-lg">New Arrival</div>
                     </div>
                 </div>
@@ -178,7 +178,9 @@
         </div>
     </div>
 </section>
-{% endif %}
+{% endif %} --> 
+
+
 
 <!-- CTA Section (Exact Match to Reference) -->
 <section class="py-32 bg-base-100">
@@ -192,7 +194,7 @@
             
             <div class="relative z-10 space-y-10 animate-in fade-in zoom-in duration-1000">
                 <p class="text-xl lg:text-3xl text-white/90 font-bold tracking-tight px-4 max-w-4xl mx-auto leading-relaxed">
-                    Discover amazing deals on quality products items for your lifestyle
+                    Elevate your setup with the best gaming hardware in Tamil Nadu
                 </p>
                 <div class="pt-4">
                     <a href="{% url 'products:product_list' %}" class="btn btn-lg h-20 bg-white text-primary border-none hover:bg-white/95 rounded-full px-16 shadow-2xl font-black text-xl tracking-tighter uppercase transform hover:scale-105 transition-all">

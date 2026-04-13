@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Contact Us - Your Shop Name{% endblock %}
+{% block title %}Contact Us - GPZ Store{% endblock %}
 
 {% block content %}
 <!-- Page Header -->
@@ -19,11 +19,49 @@
     </div>
 </section>
 
+<!-- Trust Stats Section -->
+<section class="py-12 bg-base-200/50 border-b border-base-200">
+    <div class="container mx-auto px-6">
+        <div class="flex flex-wrap justify-center gap-12 lg:gap-24">
+            <div class="flex items-center gap-4 group">
+                <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </div>
+                <div>
+                    <p class="text-xs font-black uppercase opacity-40">Avg Response</p>
+                    <p class="font-black text-lg tracking-tight">2–4 Hours</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4 group">
+                <div class="w-12 h-12 rounded-2xl bg-yellow-500/10 flex items-center justify-center text-yellow-600 group-hover:scale-110 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
+                <div>
+                    <p class="text-xs font-black uppercase opacity-40">Community</p>
+                    <p class="font-black text-lg tracking-tight">1000+ Gamers</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4 group">
+                <div class="w-12 h-12 rounded-2xl bg-green-500/10 flex items-center justify-center text-green-600 group-hover:scale-110 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
+                <div>
+                    <p class="text-xs font-black uppercase opacity-40">Reliability</p>
+                    <p class="font-black text-lg tracking-tight">100% Genuine</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Contact Section -->
 <section class="py-24 bg-base-100">
     <div class="container mx-auto px-6">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
             <!-- Contact Form -->
+
+             <!--add the astresk on the required places 
+             form validation   -->
             <div class="lg:col-span-7 bg-base-100 p-8 md:p-12 rounded-[3rem] border border-base-200 shadow-2xl shadow-base-200/50">
                 <div class="space-y-4 mb-10">
                     <h2 class="text-3xl font-black tracking-tight">Send us a message</h2>
@@ -34,32 +72,38 @@
                     {% csrf_token %}
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="form-control w-full">
-                            <label class="label"><span class="label-text font-bold uppercase tracking-widest text-[10px]">Your Name</span></label>
-                            <input type="text" name="name" placeholder="John Doe" class="input input-bordered rounded-2xl bg-base-200/50 border-base-300 focus:border-primary transition-all w-full" required />
+                            <label class="label"><span class="label-text font-bold text-[13px] text-base-content/80">Your Name <span class="text-error">*</span></span></label>
+                            <input type="text" name="name" placeholder="John Doe" class="input input-bordered rounded-2xl bg-base-200/40 border-base-200 focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all w-full" required />
                         </div>
                         <div class="form-control w-full">
-                            <label class="label"><span class="label-text font-bold uppercase tracking-widest text-[10px]">Email Address</span></label>
-                            <input type="email" name="email" placeholder="john@example.com" class="input input-bordered rounded-2xl bg-base-200/50 border-base-300 focus:border-primary transition-all w-full" required />
+                            <label class="label"><span class="label-text font-bold text-[13px] text-base-content/80">Email Address <span class="text-error">*</span></span></label>
+                            <input type="email" id="emailInput" name="email" placeholder="john@example.com" class="input input-bordered rounded-2xl bg-base-200/40 border-base-200 focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all w-full" required />
+                            <label class="label hidden" id="emailError">
+                                <span class="label-text-alt text-error font-medium">Please enter a valid email address</span>
+                            </label>
                         </div>
                     </div>
                     
                     <div class="form-control w-full">
-                        <label class="label"><span class="label-text font-bold uppercase tracking-widest text-[10px]">Subject</span></label>
-                        <input type="text" name="subject" placeholder="How can we help?" class="input input-bordered rounded-2xl bg-base-200/50 border-base-300 focus:border-primary transition-all w-full" required />
+                        <label class="label"><span class="label-text font-bold text-[13px] text-base-content/80">Subject <span class="text-error">*</span></span></label>
+                        <input type="text" name="subject" placeholder="How can we help you today?" class="input input-bordered rounded-2xl bg-base-200/40 border-base-200 focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all w-full" required />
                     </div>
                     
                     <div class="form-control w-full">
-                        <label class="label"><span class="label-text font-bold uppercase tracking-widest text-[10px]">Your Message</span></label>
-                        <textarea name="message" class="textarea textarea-bordered rounded-[2rem] bg-base-200/50 border-base-300 focus:border-primary transition-all h-48 w-full" placeholder="Tell us more about your inquiry..." required></textarea>
+                        <label class="label"><span class="label-text font-bold text-[13px] text-base-content/80">Your Message <span class="text-error">*</span></span></label>
+                        <textarea name="message" class="textarea textarea-bordered rounded-[2rem] bg-base-200/40 border-base-200 focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all h-48 w-full" placeholder="Tell us more about your inquiry..." required></textarea>
                     </div>
                     
-                    <div class="pt-4">
-                        <button type="submit" class="btn btn-primary btn-lg rounded-full px-12 shadow-xl shadow-primary/20 font-black tracking-tight uppercase group">
-                            Send Message
+                    <div class="pt-6 flex flex-col sm:flex-row items-center gap-6">
+                        <button type="submit" id="submitBtn" class="btn btn-primary btn-lg rounded-full px-12 shadow-xl shadow-primary/20 font-black tracking-tight uppercase group">
+                            <span>Send Message</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
                         </button>
+                        <p class="text-[12px] text-base-content/40 font-medium max-w-[200px]">
+                            Your message is private and will only be used to respond to your inquiry.
+                        </p>
                     </div>
                 </form>
             </div>
@@ -71,26 +115,26 @@
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:grid-cols-1">
                         <!-- WhatsApp -->
-                        <div class="flex items-start gap-6 group">
+                        <a href="https://wa.me/919876543210" target="_blank" class="flex items-start gap-6 group">
                             <div class="w-14 h-14 rounded-2xl bg-green-500/10 flex items-center justify-center text-green-600 group-hover:bg-green-500 group-hover:text-white transition-all shadow-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-10.6 8.38 8.38 0 0 1 3.8.9L21 3z"></path></svg>
                             </div>
                             <div class="space-y-1">
                                 <h4 class="text-lg font-black tracking-tight">WhatsApp</h4>
-                                <p class="text-base-content/60 font-medium">+1 234 567 890</p>
+                                <p class="text-base-content/60 font-medium">+91 98765 43210</p>
                             </div>
-                        </div>
+                        </a>
 
                         <!-- Email -->
-                        <div class="flex items-start gap-6 group">
+                        <a href="mailto:support@gpzstore.com" class="flex items-start gap-6 group">
                             <div class="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-600 group-hover:bg-blue-500 group-hover:text-white transition-all shadow-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                             </div>
                             <div class="space-y-1">
                                 <h4 class="text-lg font-black tracking-tight">Email Support</h4>
-                                <p class="text-base-content/60 font-medium">info@store.com</p>
+                                <p class="text-base-content/60 font-medium">support@gpzstore.com</p>
                             </div>
-                        </div>
+                        </a>
 
                         <!-- Address -->
                         <div class="flex items-start gap-6 group">
@@ -99,7 +143,7 @@
                             </div>
                             <div class="space-y-1">
                                 <h4 class="text-lg font-black tracking-tight">Location</h4>
-                                <p class="text-base-content/60 font-medium">123 Store Street, City, Country</p>
+                                <p class="text-base-content/60 font-medium">Chennai, Tamil Nadu, India</p>
                             </div>
                         </div>
 
@@ -117,16 +161,68 @@
                 </div>
 
                 <!-- Dealership Banner -->
-                <div class="bg-slate-900 rounded-[2.5rem] p-8 text-white relative overflow-hidden group">
-                    <div class="relative z-10 space-y-4">
-                        <h4 class="text-xl font-bold tracking-tight">Interested in dealership?</h4>
-                        <p class="text-white/60 text-sm font-medium">Partner with us and grow your business with our quality products.</p>
-                        <a href="#" class="btn btn-primary btn-sm rounded-full px-6 font-bold shadow-lg">Become a Partner</a>
+                <div class="bg-slate-950 rounded-[2.5rem] p-10 text-white relative overflow-hidden group shadow-2xl shadow-slate-900/40">
+                    <div class="relative z-10 space-y-6">
+                        <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-primary-content">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 1 4-4h2"></path><circle cx="8" cy="9" r="4"></circle><path d="M3 11V9a7 7 0 0 1 14 0v2"></path></svg>
+                        </div>
+                        <div class="space-y-2">
+                            <h4 class="text-2xl font-black tracking-tight tracking-tighter uppercase italic">Partner With Us</h4>
+                            <p class="text-white/50 text-sm font-medium leading-relaxed">Expand your horizon with the most trusted gaming supplier in South India. Get wholesale access and priority support.</p>
+                        </div>
+                        <a href="#" class="btn btn-primary rounded-full px-8 font-black uppercase tracking-tight shadow-lg shadow-primary/20">Become a Partner</a>
                     </div>
-                    <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-primary/10 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
+                    <!-- Decorative patterns -->
+                    <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-primary/5 rounded-full group-hover:scale-150 transition-transform duration-1000"></div>
+                    <div class="absolute top-4 right-4 opacity-5">
+                        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="50" fill="white"/></svg>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<!-- Google Maps Section -->
+<section class="pb-24 bg-base-100">
+    <div class="container mx-auto px-6">
+        <div class="rounded-[3rem] overflow-hidden shadow-2xl border border-base-200 grayscale hover:grayscale-0 transition-all duration-700 h-[450px]">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124440.33917865243!2d80.1415104690835!3d13.04747331580436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5265ea4f7d333f%3A0x80731745181dc20!2sChennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1713024000000!5m2!1sen!2sin" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Real-time form validation
+    const emailInput = document.getElementById('emailInput');
+    const emailError = document.getElementById('emailError');
+    const submitBtn = document.getElementById('submitBtn');
+
+    emailInput.addEventListener('input', function() {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (this.value && !emailPattern.test(this.value)) {
+            emailError.classList.remove('hidden');
+            this.classList.add('input-error');
+        } else {
+            emailError.classList.add('hidden');
+            this.classList.remove('input-error');
+        }
+    });
+
+    // Simple script to show loading state on form submission
+    document.querySelector('form').addEventListener('submit', function() {
+        if (!submitBtn.classList.contains('loading')) {
+            submitBtn.classList.add('loading');
+            submitBtn.querySelector('span').innerText = 'Sending...';
+        }
+    });
+</script>
 {% endblock %}
