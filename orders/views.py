@@ -5,15 +5,14 @@ from django.views.decorators.http import require_POST
 from django.conf import settings
 import requests
 import threading
-import base64
-import os
 from cart.cart import Cart
 from .models import Order, OrderItem
 
 
 def _push_to_sheets(order):
     """
-    Silently push order data (including payment screenshot) to Google Sheets.
+    Silently push order data to Google Sheets.
+    Sends the Cloudinary image URL — no file reading needed.
     Runs in the background — user never sees this.
     """
     try:
@@ -21,15 +20,13 @@ def _push_to_sheets(order):
         if not url:
             return
 
-        # Encode the payment screenshot as base64 so it can be sent as text
-        screenshot_b64 = ""
-        screenshot_filename = ""
+        # Get the Cloudinary URL for the screenshot (empty string if none uploaded)
+        screenshot_url = ""
         if order.payment_screenshot:
-            file_path = os.path.join(settings.MEDIA_ROOT, str(order.payment_screenshot))
-            if os.path.exists(file_path):
-                with open(file_path, "rb") as img_file:
-                    screenshot_b64 = base64.b64encode(img_file.read()).decode("utf-8")
-                screenshot_filename = f"order_{order.id}_payment.jpg"
+            try:
+                screenshot_url = order.payment_screenshot.url
+            except Exception:
+                screenshot_url = ""
 
         payload = {
             "order_id":          order.id,
@@ -43,14 +40,13 @@ def _push_to_sheets(order):
             "postal_code":       order.postal_code,
             "country":           order.country,
             "total_amount":      str(order.total_amount),
-            "payment_screenshot": screenshot_b64,
-            "screenshot_filename": screenshot_filename,
+            "screenshot_url":    screenshot_url,
             "is_paid":           order.is_paid,
             "utr_number":        order.utr_number or "",
             "created_at":        order.created_at.strftime("%Y-%m-%d %H:%M:%S"),
         }
 
-        requests.post(url, json=payload, timeout=15)
+        requests.post(url, json=payload, timeout=10)
 
     except Exception:
         pass  # Silently ignore — never surface errors to the user

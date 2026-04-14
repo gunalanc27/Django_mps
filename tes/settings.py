@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions" , # for manageing the sessions  
     "django.contrib.messages" , # for sending the messages to the users 
     "django.contrib.staticfiles" , # fir servingt he static files to theclint (is it include the temolate too )
+    "cloudinary_storage" ,
+    "cloudinary" ,
     "accounts" ,
     "core" ,
     "products" ,
@@ -172,6 +174,13 @@ PAYEE_NAME = os.environ.get("PAYEE_NAME", "GPZ Store")
 
 # Google Sheets Sync — Apps Script Web App URL
 GOOGLE_SCRIPT_URL = os.environ.get("GOOGLE_SCRIPT_URL", "")
+
+# Cloudinary — Cloud Storage for uploaded files (fixes Vercel read-only filesystem)
+import cloudinary
+cloudinary.config(
+    cloudinary_url=os.environ.get("CLOUDINARY_URL", "")
+)
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 CART_SESSION_ID = "cart"
 
