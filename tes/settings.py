@@ -166,6 +166,13 @@ if not DEBUG:
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+# UPI Payment Configuration
+UPI_ID = os.environ.get("UPI_ID", "gpzstore@oksbi")
+PAYEE_NAME = os.environ.get("PAYEE_NAME", "GPZ Store")
+
+# Google Sheets Sync — Apps Script Web App URL
+GOOGLE_SCRIPT_URL = os.environ.get("GOOGLE_SCRIPT_URL", "")
+
 CART_SESSION_ID = "cart"
 
 TAILWIND_APP_NAME = 'theme'

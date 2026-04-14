@@ -1,135 +1,481 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Checkout - GPZ Store{% endblock %}
+{% block title %}CHECKOUT - GPZ Store{% endblock %}
+
+{% block extra_head %}
+<!-- Include QRCode.js library -->
+{% endblock %}
 
 {% block content %}
-<!-- Page Header -->
-<section class="bg-gradient-to-br from-[#7C3AED] via-[#4F46E5] to-[#2563EB] text-white py-16 lg:py-20 relative overflow-hidden">
+<!-- Page Header & Progress -->
+<section class="bg-gradient-to-br from-[#7C3AED] via-[#4F46E5] to-[#2563EB] text-white py-20 lg:py-28 relative overflow-hidden">
     <div class="absolute inset-0 opacity-10">
         <div class="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
     </div>
-    <div class="container mx-auto px-6 relative z-10 text-center animate-in slide-in-from-bottom duration-700">
-        <h1 class="text-4xl lg:text-5xl font-black mb-4 tracking-tight uppercase">Checkout</h1>
-        <p class="text-lg text-white/80 font-medium uppercase tracking-widest text-[10px]">Complete your order information</p>
-    </div>
-</section>
+    <div class="container mx-auto px-6 relative z-10 text-center">
+        <h1 class="text-4xl lg:text-6xl font-black mb-4 tracking-tighter uppercase">Checkout</h1>
+        <p class="text-[10px] font-black tracking-[0.4em] uppercase opacity-70 mb-16">Secure your order in four simple steps</p>
 
-<section class="py-20 bg-base-100">
-    <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 xl:grid-cols-12 gap-16">
-            <!-- Checkout Form -->
-            <div class="xl:col-span-8 bg-base-100 p-8 md:p-12 rounded-[3.5rem] border border-base-200 shadow-2xl shadow-base-200/50">
-                <div class="flex items-center gap-4 mb-12">
-                    <div class="w-12 h-1 bg-primary rounded-full"></div>
-                    <h3 class="text-3xl font-black tracking-tight uppercase">Shipping Information</h3>
-                </div>
+        <!-- Progress Stepper (4 Steps) -->
+        <div class="max-w-5xl mx-auto">
+            <div class="flex items-center justify-between relative px-4 text-[9px] font-black uppercase tracking-widest text-white/30">
+                <div class="absolute top-6 left-0 w-full h-1 bg-white/10 -translate-y-1/2 rounded-full"></div>
+                <div id="progress-bar" class="absolute top-6 left-0 h-1 bg-white -translate-y-1/2 rounded-full transition-all duration-700" style="width: 0%;"></div>
                 
-                <form method="post" class="space-y-8">
-                    {% csrf_token %}
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="form-control w-full">
-                            <label class="label"><span class="label-text font-black uppercase tracking-widest text-[10px]">First Name</span></label>
-                            <input type="text" name="first_name" placeholder="John" class="input input-bordered rounded-[1.25rem] bg-base-200/50 border-base-300 focus:border-primary transition-all w-full" required />
-                        </div>
-                        <div class="form-control w-full">
-                            <label class="label"><span class="label-text font-black uppercase tracking-widest text-[10px]">Last Name</span></label>
-                            <input type="text" name="last_name" placeholder="Doe" class="input input-bordered rounded-[1.25rem] bg-base-200/50 border-base-300 focus:border-primary transition-all w-full" required />
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="form-control w-full">
-                            <label class="label"><span class="label-text font-black uppercase tracking-widest text-[10px]">Email Address</span></label>
-                            <input type="email" name="email" placeholder="john@example.com" class="input input-bordered rounded-[1.25rem] bg-base-200/50 border-base-300 focus:border-primary transition-all w-full" required />
-                        </div>
-                        <div class="form-control w-full">
-                            <label class="label"><span class="label-text font-black uppercase tracking-widest text-[10px]">Phone Number</span></label>
-                            <input type="text" name="phone" placeholder="+1 (234) 567-890" class="input input-bordered rounded-[1.25rem] bg-base-200/50 border-base-300 focus:border-primary transition-all w-full" required />
-                        </div>
-                    </div>
-
-                    <div class="form-control w-full">
-                        <label class="label"><span class="label-text font-black uppercase tracking-widest text-[10px]">Street Address</span></label>
-                        <textarea name="address" class="textarea textarea-bordered rounded-[1.5rem] bg-base-200/50 border-base-300 focus:border-primary transition-all h-24 w-full" placeholder="123 Shop Street" required></textarea>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="form-control w-full">
-                            <label class="label"><span class="label-text font-black uppercase tracking-widest text-[10px]">City</span></label>
-                            <input type="text" name="city" placeholder="City" class="input input-bordered rounded-[1.25rem] bg-base-200/50 border-base-300 focus:border-primary transition-all w-full" required />
-                        </div>
-                        <div class="form-control w-full">
-                            <label class="label"><span class="label-text font-black uppercase tracking-widest text-[10px]">State</span></label>
-                            <input type="text" name="state" placeholder="State" class="input input-bordered rounded-[1.25rem] bg-base-200/50 border-base-300 focus:border-primary transition-all w-full" required />
-                        </div>
-                        <div class="form-control w-full">
-                            <label class="label"><span class="label-text font-black uppercase tracking-widest text-[10px]">Postal Code</span></label>
-                            <input type="text" name="postal_code" placeholder="12345" class="input input-bordered rounded-[1.25rem] bg-base-200/50 border-base-300 focus:border-primary transition-all w-full" required />
-                        </div>
-                    </div>
-
-                    <div class="form-control w-full">
-                        <label class="label"><span class="label-text font-black uppercase tracking-widest text-[10px]">Country</span></label>
-                        <input type="text" name="country" placeholder="United States" class="input input-bordered rounded-[1.25rem] bg-base-200/50 border-base-300 focus:border-primary transition-all w-full" required />
-                    </div>
-
-                    <div class="pt-8">
-                        <button type="submit" class="btn btn-primary btn-lg rounded-full px-16 shadow-2xl shadow-primary/20 font-black tracking-tight uppercase group h-20">
-                            Confirm Order
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </button>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Order Summary -->
-            <div class="xl:col-span-4 space-y-10 animate-in slide-in-from-right duration-700">
-                <div class="bg-slate-950 p-10 rounded-[3rem] text-white shadow-2xl space-y-10 relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent pointer-events-none"></div>
-                    
-                    <h3 class="text-3xl font-black tracking-tight uppercase relative z-10">Summary</h3>
-                    
-                    <div class="space-y-6 relative z-10">
-                        {% for item in cart %}
-                        <div class="flex justify-between items-start group">
-                            <div class="space-y-1">
-                                <p class="font-bold text-sm tracking-tight leading-tight group-hover:text-primary transition-colors">{{ item.product.name }}</p>
-                                <p class="text-[10px] font-black opacity-30 uppercase tracking-widest">Qty: {{ item.quantity }}</p>
-                            </div>
-                            <span class="font-bold text-sm text-primary-content tracking-tighter">${{ item.total_price }}</span>
-                        </div>
-                        <div class="h-px bg-white/5 w-full"></div>
-                        {% endfor %}
-                    </div>
-
-                    <div class="flex justify-between items-center text-primary pt-6 relative z-10">
-                        <span class="font-black uppercase tracking-widest text-xs">Final Total</span>
-                        <span class="text-4xl font-bold tracking-tighter italic text-white">${{ cart.get_total_price }}</span>
-                    </div>
-                    
-                    <div class="bg-white/5 p-6 rounded-3xl space-y-4 border border-white/10 mt-10 relative z-10">
-                        <div class="flex items-center gap-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span class="text-[10px] font-black uppercase tracking-widest text-white/40">Secure Transaction</span>
-                        </div>
-                        <p class="text-[10px] font-medium opacity-50 leading-relaxed uppercase tracking-wider">Your order will be processed securely. By proceeding, you agree to our Terms of Service.</p>
-                    </div>
+                <!-- Step 1 -->
+                <div class="step-item relative z-10 flex flex-col items-center gap-4 active-step" data-step="1">
+                    <div class="w-12 h-12 rounded-full bg-white text-primary flex items-center justify-center font-black shadow-2xl transition-all duration-300">1</div>
+                    <span>Shipping</span>
                 </div>
-                
-                <a href="{% url 'cart:cart_detail' %}" class="btn btn-ghost btn-block rounded-full font-bold uppercase tracking-widest text-[10px] gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                    </svg>
-                    Edit Cart Items
-                </a>
+                <!-- Step 2 -->
+                <div class="step-item relative z-10 flex flex-col items-center gap-4" data-step="2">
+                    <div class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center font-black transition-all duration-300">2</div>
+                    <span>Payment</span>
+                </div>
+                <!-- Step 3 -->
+                <div class="step-item relative z-10 flex flex-col items-center gap-4" data-step="3">
+                    <div class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center font-black transition-all duration-300">3</div>
+                    <span>Review</span>
+                </div>
+                <!-- Step 4 -->
+                <div class="step-item relative z-10 flex flex-col items-center gap-4" data-step="4">
+                    <div class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center font-black transition-all duration-300">4</div>
+                    <span>Confirm</span>
+                </div>
             </div>
         </div>
     </div>
 </section>
+
+<div class="bg-base-100 min-h-screen py-16">
+    <div class="container mx-auto px-6 max-w-4xl">
+        <form id="checkout-form" method="post" action="{% url 'orders:checkout' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Step 1: User Personal / Shipping Details -->
+            <section id="step-1" class="wizard-step bg-white p-8 md:p-14 rounded-[3.5rem] border border-base-200 shadow-2xl space-y-10 animate-in fade-in slide-in-from-right-8 duration-500">
+                <div class="flex items-center gap-4">
+                    <div class="w-1.5 h-8 bg-primary rounded-full"></div>
+                    <h2 class="text-2xl font-black tracking-tight uppercase">Shipping Details</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="form-control">
+                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-slate-500">First Name <span class="text-error">*</span></span></label>
+                        <input type="text" name="first_name" id="id_first_name" placeholder="e.g. John" class="input input-bordered h-14 rounded-2xl bg-slate-50 border-slate-200 focus:border-primary text-sm font-bold" required />
+                    </div>
+                    <div class="form-control">
+                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-slate-500">Last Name <span class="text-error">*</span></span></label>
+                        <input type="text" name="last_name" id="id_last_name" placeholder="e.g. Doe" class="input input-bordered h-14 rounded-2xl bg-slate-50 border-slate-200 focus:border-primary text-sm font-bold" required />
+                    </div>
+                    <div class="form-control">
+                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-slate-500">Email Address <span class="text-error">*</span></span></label>
+                        <input type="email" name="email" id="id_email" value="{{ user.email }}" placeholder="john@example.com" class="input input-bordered h-14 rounded-2xl bg-slate-50 border-slate-200 focus:border-primary text-sm font-bold" required />
+                    </div>
+                    <div class="form-control">
+                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-slate-500">Phone Number <span class="text-error">*</span></span></label>
+                        <input type="tel" name="phone" id="id_phone" placeholder="+91 XXXXXXXXXX" class="input input-bordered h-14 rounded-2xl bg-slate-50 border-slate-200 focus:border-primary text-sm font-bold" required />
+                    </div>
+                    <div class="form-control md:col-span-2">
+                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-slate-500">Street Address <span class="text-error">*</span></span></label>
+                        <textarea name="address" id="id_address" placeholder="House No, Street Name, Area" class="textarea textarea-bordered h-28 rounded-2xl bg-slate-50 border-slate-200 focus:border-primary text-sm font-bold py-4" required></textarea>
+                    </div>
+                    <div class="form-control">
+                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-slate-500">City <span class="text-error">*</span></span></label>
+                        <input type="text" name="city" id="id_city" placeholder="City" class="input input-bordered h-14 rounded-2xl bg-slate-50 border-slate-200 focus:border-primary text-sm font-bold" required />
+                    </div>
+                    <div class="form-control">
+                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-slate-500">State <span class="text-error">*</span></span></label>
+                        <input type="text" name="state" id="id_state" placeholder="State" class="input input-bordered h-14 rounded-2xl bg-slate-50 border-slate-200 focus:border-primary text-sm font-bold" required />
+                    </div>
+                    <div class="form-control">
+                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-slate-500">Postal Code <span class="text-error">*</span></span></label>
+                        <input type="text" name="postal_code" id="id_postal_code" placeholder="Postal Code" class="input input-bordered h-14 rounded-2xl bg-slate-50 border-slate-200 focus:border-primary text-sm font-bold" required />
+                    </div>
+                    <div class="form-control">
+                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-slate-500">Country <span class="text-error">*</span></span></label>
+                        <select name="country" id="id_country" class="select select-bordered h-14 rounded-2xl bg-slate-50 border-slate-200 focus:border-primary text-sm font-bold" required>
+                            <option value="India" selected>India</option>
+                            <option value="United States">United States</option>
+                            <option value="United Kingdom">United Kingdom</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="pt-10 flex justify-end">
+                    <button type="button" onclick="nextStep(2)" class="btn btn-primary btn-lg rounded-2xl px-12 h-16 font-black uppercase tracking-tight shadow-xl shadow-primary/20 group">
+                        Next: Payment
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                    </button>
+                </div>
+            </section>
+<!-- Step 2: Payment Details (Dynamic QR & Upload) -->
+<section id="step-2" class="wizard-step hidden bg-white p-8 md:p-14 rounded-[3.5rem] border border-base-200 shadow-2xl text-center space-y-10 animate-in fade-in slide-in-from-right-8 duration-500">
+    
+    <div class="flex items-center gap-4 text-left">
+        <div class="w-1.5 h-8 bg-primary rounded-full"></div>
+        <h2 class="text-2xl font-black tracking-tight uppercase">Scan & Pay via UPI</h2>
+    </div>
+
+    <div class="max-w-md mx-auto space-y-10">
+        
+        <!-- UPI Payee Display -->
+        <div class="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-200 space-y-4 text-left relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-4 opacity-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            </div>
+            <div>
+                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Merchant Name</p>
+                <p class="text-lg font-black text-slate-900">{{ payee_name }}</p>
+            </div>
+            <div>
+                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">UPI ID (VPA)</p>
+                <div class="flex items-center gap-2">
+                    <p id="backend-upi-id" class="text-sm font-bold text-primary">{{ upi_id }}</p>
+                    <button type="button" onclick="copyUPI()" class="btn btn-ghost btn-xs rounded-lg hover:bg-primary/10">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="pt-2">
+                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Payable Amount</p>
+                <p class="text-2xl font-black italic tracking-tighter text-slate-900">₹<span id="payable-amount">{{ cart.get_total_price }}</span></p>
+            </div>
+        </div>
+
+        <!-- Dynamic QR Code Container -->
+        <div class="space-y-6">
+            <div id="qr_container" class="flex flex-col items-center space-y-4">
+                <div class="relative group">
+                    <div class="absolute -inset-6 bg-gradient-to-r from-primary/20 to-blue-500/20 rounded-[3rem] blur-2xl opacity-50"></div>
+                    <div class="bg-white p-6 rounded-[2.5rem] shadow-2xl relative z-10 border-8 border-white mx-auto">
+                        <div id="qrcode"></div>
+                    </div>
+                </div>
+                <p class="text-[10px] text-slate-500 font-black uppercase tracking-[0.2em] text-center max-w-[260px]">
+                    Scan with any UPI app to pay
+                </p>
+            </div>
+        </div>
+
+        <!-- Payment Proof Upload & Preview -->
+        <div class="space-y-8 pt-8 border-t border-slate-200">
+            <div class="form-control text-left">
+                <label class="label">
+                    <span class="label-text font-black text-[10px] uppercase tracking-widest text-slate-500">
+                        Upload Payment Screenshot <span class="text-error">*</span>
+                    </span>
+                </label>
+                <input type="file" name="payment_screenshot" id="id_payment_screenshot" 
+                       class="file-input file-input-bordered file-input-primary w-full rounded-2xl bg-slate-50 h-16" 
+                       required accept="image/*" onchange="previewScreenshot(event)" />
+            </div>
+
+            <!-- Screenshot Preview Area -->
+            <div id="screenshot-preview-container" class="hidden animate-in fade-in zoom-in duration-300">
+                <div class="relative max-w-[200px] mx-auto group">
+                    <img id="screenshot-preview" src="#" alt="Screenshot Preview" class="rounded-2xl shadow-lg border-4 border-white w-full h-auto" />
+                    <button type="button" onclick="clearScreenshot()" class="absolute -top-2 -right-2 w-8 h-8 bg-error text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                    <div class="absolute bottom-2 left-0 right-0 text-center">
+                        <span class="bg-success/90 backdrop-blur-md text-white text-[8px] font-black uppercase tracking-widest py-1 px-3 rounded-full shadow-lg">Image Selected</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-control text-left">
+                <label class="label">
+                    <span class="label-text font-black text-[10px] uppercase tracking-widest text-slate-500">
+                        UTR / Transaction Number <span class="text-error">*</span>
+                    </span>
+                </label>
+                <input type="text" name="utr_number" id="id_utr_number" 
+                       placeholder="Enter 12-digit UTR / Reference Number" 
+                       class="input input-bordered h-14 rounded-2xl bg-slate-50 border-slate-200 focus:border-primary text-sm font-bold" required />
+            </div>
+
+            <input type="hidden" name="payment_method" value="upi_qr" />
+        </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="pt-10 flex justify-between items-center">
+        <button type="button" onclick="prevStep(1)" 
+                class="btn btn-ghost btn-lg rounded-2xl px-8 h-16 font-black uppercase tracking-tight opacity-40 hover:opacity-100">
+            Back
+        </button>
+        <button type="button" onclick="nextStep(3)" 
+                class="btn btn-primary btn-lg rounded-2xl px-12 h-16 font-black uppercase tracking-tight shadow-xl shadow-primary/20 group">
+            Next: Review
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+        </button>
+    </div>
+</section>
+
+            <!-- Step 3: Order Overview / Review Data -->
+            <section id="step-3" class="wizard-step hidden bg-slate-50 p-8 md:p-14 rounded-[4rem] border border-base-200 shadow-2xl space-y-10 animate-in fade-in slide-in-from-right-8 duration-500">
+                <div class="flex items-center gap-4">
+                    <div class="w-1.5 h-8 bg-primary rounded-full"></div>
+                    <h2 class="text-2xl font-black tracking-tight uppercase">Review Your Data</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <!-- Shipping Review -->
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-3 text-left">
+                            <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                            </div>
+                            <h3 class="font-black text-xs uppercase tracking-[0.2em] text-slate-400">Shipping Info</h3>
+                        </div>
+                        <div class="bg-white p-6 rounded-3xl border border-slate-200 space-y-3 text-left">
+                            <p class="text-sm font-black italic"><span id="review-first_name"></span> <span id="review-last_name"></span></p>
+                            <p class="text-xs font-bold text-slate-500"><span id="review-email"></span></p>
+                            <p class="text-xs font-bold text-slate-500"><span id="review-phone"></span></p>
+                            <p class="text-xs font-bold text-slate-500 leading-relaxed"><span id="review-address"></span>, <span id="review-city"></span>, <span id="review-state"></span> - <span id="review-postal_code"></span>, <span id="review-country"></span></p>
+                        </div>
+                    </div>
+
+                    <!-- Payment Review -->
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-3 text-left">
+                            <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                            </div>
+                            <h3 class="font-black text-xs uppercase tracking-[0.2em] text-slate-400">Payment Info</h3>
+                        </div>
+                        <div class="bg-white p-6 rounded-3xl border border-slate-200 space-y-3 text-left">
+                            <p class="text-xs font-black uppercase tracking-widest text-slate-400">Method: <span class="text-slate-900">UPI QR</span></p>
+                            <p class="text-xs font-black uppercase tracking-widest text-slate-400">UTR / TXN ID: <span id="review-utr_number" class="text-primary italic"></span></p>
+                            <div class="flex items-center gap-2 pt-2 text-success">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                <span class="text-[9px] font-black uppercase tracking-widest">Screenshot Uploaded</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Summary Review -->
+                    <div class="md:col-span-2 space-y-6">
+                         <div class="flex items-center gap-3 text-left">
+                            <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+                            </div>
+                            <h3 class="font-black text-xs uppercase tracking-[0.2em] text-slate-400">Order Items</h3>
+                        </div>
+                        <div class="bg-white p-8 rounded-3xl border border-slate-200 divide-y divide-slate-100 text-left">
+                            {% for item in cart %}
+                            <div class="flex justify-between items-center py-4 first:pt-0 last:pb-0">
+                                <div>
+                                    <p class="text-sm font-black uppercase tracking-tight">{{ item.product.name }}</p>
+                                    <p class="text-[9px] font-black text-slate-400 tracking-widest uppercase">Qty: {{ item.quantity }}</p>
+                                </div>
+                                <span class="text-lg font-black italic tracking-tighter text-slate-900">${{ item.total_price }}</span>
+                            </div>
+                            {% endfor %}
+                            <div class="pt-6 flex justify-between items-end">
+                                <div>
+                                    <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Shipping: <span class="text-success">FREE</span></p>
+                                    <p class="text-xl font-black uppercase tracking-tighter mt-1">Total Payable</p>
+                                </div>
+                                <p class="text-4xl font-black tracking-tighter italic text-primary leading-none">${{ cart.get_total_price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-10 flex justify-between items-center border-t border-slate-200">
+                    <button type="button" onclick="prevStep(2)" class="btn btn-ghost btn-lg rounded-2xl px-8 h-16 font-black uppercase tracking-tight opacity-40 hover:opacity-100">Back</button>
+                    <button type="button" onclick="nextStep(4)" class="btn btn-primary btn-lg rounded-2xl px-12 h-16 font-black uppercase tracking-tight shadow-xl shadow-primary/20 group">
+                        Next: Confirm
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Step 4: Confirmation / Final Review & Submit -->
+            <section id="step-4" class="wizard-step hidden bg-white p-8 md:p-14 rounded-[3.5rem] border border-primary/20 shadow-2xl shadow-primary/10 text-center space-y-10 animate-in fade-in slide-in-from-right-8 duration-500">
+                <div class="w-20 h-20 bg-primary/10 rounded-3xl flex items-center justify-center text-primary mx-auto mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                </div>
+                
+                <h2 class="text-3xl font-black tracking-tight uppercase px-12 leading-tight">One last check to ensure everything is perfect!</h2>
+                <p class="text-sm font-bold text-slate-500 uppercase tracking-widest">By confirming, you finalize your order and agree to our terms.</p>
+
+                <div class="max-w-md mx-auto space-y-8 pt-6">
+                    <div class="form-control items-center">
+                        <label class="label cursor-pointer gap-4 group">
+                            <input type="checkbox" id="tos-checkbox" class="checkbox checkbox-primary w-6 h-6 rounded-lg" required />
+                            <span class="text-xs font-bold uppercase tracking-tight text-slate-600 group-hover:text-primary transition-colors text-center leading-relaxed">I have reviewed all the data and it is correct. I agree to the Terms of Service.</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" id="submit-btn" class="btn btn-primary btn-lg w-full h-20 rounded-[2rem] shadow-2xl shadow-primary/30 font-black tracking-tighter uppercase text-2xl group relative overflow-hidden disabled:opacity-30">
+                        <span class="relative z-10 flex items-center justify-center gap-3">
+                            Confirm Order
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                        </span>
+                        <div id="btn-loader" class="absolute inset-0 bg-primary flex items-center justify-center translate-y-full transition-transform duration-300">
+                            <span class="loading loading-spinner loading-md"></span>
+                        </div>
+                    </button>
+                    
+                    <button type="button" onclick="prevStep(3)" class="btn btn-ghost btn-sm font-black uppercase tracking-widest opacity-40 hover:opacity-100">Review Data Again</button>
+                </div>
+            </section>
+        </form>
+    </div>
+</div>
+
+<style>
+    .wizard-step.hidden { display: none !important; }
+    .step-item.active-step div { @apply ring-8 ring-white/20; }
+</style>
+
+<script>
+    let currentStepIdx = 1;
+    const steps = document.querySelectorAll('.wizard-step');
+    const stepItems = document.querySelectorAll('.step-item');
+    const progressBar = document.getElementById('progress-bar');
+    const form = document.getElementById('checkout-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const tosCheckbox = document.getElementById('tos-checkbox');
+    
+    // QR Generation Instance
+    let qrcode = null;
+
+    function updateProgressBar(step) {
+        const progress = ((step - 1) / (stepItems.length - 1)) * 100;
+        progressBar.style.width = `${progress}%`;
+        
+        stepItems.forEach((item, idx) => {
+            const numDiv = item.querySelector('div');
+            if (idx + 1 <= step) {
+                numDiv.classList.remove('bg-white/10', 'text-white');
+                numDiv.classList.add('bg-white', 'text-primary');
+                item.classList.add('active-step');
+                item.classList.remove('text-white/30');
+                item.classList.add('text-white');
+            } else {
+                numDiv.classList.add('bg-white/10', 'text-white');
+                numDiv.classList.remove('bg-white', 'text-primary');
+                item.classList.remove('active-step');
+                item.classList.remove('text-white');
+                item.classList.add('text-white/30');
+            }
+        });
+    }
+
+    function populateReview() {
+        const fields = [
+            'first_name', 'last_name', 'email', 'phone', 
+            'address', 'city', 'state', 'postal_code', 'country',
+            'utr_number'
+        ];
+        
+        fields.forEach(f => {
+            const input = document.getElementById(`id_${f}`);
+            const display = document.getElementById(`review-${f}`);
+            if (input && display) {
+                display.textContent = input.value;
+            }
+        });
+    }
+
+    function generateUPIQR() {
+        const upiId = "{{ upi_id }}";
+        const payeeName = "{{ payee_name }}";
+        const amount = "{{ cart.get_total_price }}";
+        const currency = "INR";
+        
+        // UPI URI Format: upi://pay?pa=VPA&pn=NAME&am=AMOUNT&cu=CURRENCY
+        const upiUri = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=${currency}`;
+        
+        const qrContainer = document.getElementById('qrcode');
+        qrContainer.innerHTML = ''; // Clear previous
+        
+        qrcode = new QRCode(qrContainer, {
+            text: upiUri,
+            width: 200,
+            height: 200,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+    }
+
+    function previewScreenshot(event) {
+        const file = event.target.files[0];
+        const container = document.getElementById('screenshot-preview-container');
+        const preview = document.getElementById('screenshot-preview');
+        
+        if (file) {
+            preview.src = URL.createObjectURL(file);
+            container.classList.remove('hidden');
+        }
+    }
+
+    function clearScreenshot() {
+        const input = document.getElementById('id_payment_screenshot');
+        const container = document.getElementById('screenshot-preview-container');
+        input.value = '';
+        container.classList.add('hidden');
+    }
+
+    function copyUPI() {
+        const upiText = document.getElementById('backend-upi-id').textContent;
+        navigator.clipboard.writeText(upiText).then(() => {
+            alert('UPI ID copied to clipboard!');
+        });
+    }
+
+    function showStep(n) {
+        steps.forEach(s => s.classList.add('hidden'));
+        document.getElementById(`step-${n}`).classList.remove('hidden');
+        updateProgressBar(n);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        currentStepIdx = n;
+        
+        if (n === 2) generateUPIQR();
+        if (n === 3) populateReview();
+    }
+
+    function nextStep(n) {
+        const currentFields = document.getElementById(`step-${currentStepIdx}`).querySelectorAll('[required]');
+        let valid = true;
+        
+        currentFields.forEach(field => {
+            if (!field.checkValidity()) {
+                field.reportValidity();
+                valid = false;
+            }
+        });
+
+        if (valid) showStep(n);
+    }
+
+    function prevStep(n) {
+        showStep(n);
+    }
+
+    // Final Button Logic
+    function validateFinal() {
+        submitBtn.disabled = !tosCheckbox.checked;
+    }
+    tosCheckbox.addEventListener('change', validateFinal);
+
+    form.addEventListener('submit', function(e) {
+        const loader = document.getElementById('btn-loader');
+        submitBtn.classList.add('pointer-events-none');
+        loader.classList.remove('translate-y-full');
+    });
+
+    // Initial State
+    updateProgressBar(1);
+    validateFinal();
+</script>
 {% endblock %}

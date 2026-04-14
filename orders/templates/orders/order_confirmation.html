@@ -26,10 +26,26 @@
 
         <!-- Order Insight Card -->
         <div class="max-w-4xl mx-auto bg-white p-10 lg:p-16 rounded-[4rem] border border-base-200 shadow-2xl shadow-base-200/50 space-y-12 text-left animate-in slide-in-from-bottom duration-1000">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 border-b border-base-200 pb-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-base-200 pb-12">
                 <div class="space-y-2">
                     <p class="text-[10px] font-black opacity-30 uppercase tracking-[0.3em]">Placement Date</p>
                     <p class="text-2xl font-black tracking-tight">{{ order.created_at|date:"F d, Y" }}</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="grid grid-cols-2 gap-4 text-xs font-black uppercase tracking-widest text-slate-500">
+                    <p>Payment Method:</p>
+                    <p class="text-slate-900 text-right">{{ order.payment_method|upper }}</p>
+                    
+                    {% if order.utr_number %}
+                    <p>UTR Number:</p>
+                    <p class="text-primary text-right italic">{{ order.utr_number }}</p>
+                    {% endif %}
+                    
+                    {% if order.payment_screenshot %}
+                    <p>Payment Proof:</p>
+                    <p class="text-success text-right">RECEIVED</p>
+                    {% endif %}
+                </div>
                 </div>
                 <div class="space-y-2 md:text-right">
                     <p class="text-[10px] font-black opacity-30 uppercase tracking-[0.3em]">Total Amount</p>

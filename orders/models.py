@@ -26,6 +26,10 @@ class Order(models.Model):
     country = models.CharField(max_length=100)
     total_amount = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="pending")
+    payment_method = models.CharField(max_length=50, default="cod")
+    is_paid = models.BooleanField(default=False)
+    utr_number = models.CharField(max_length=100, blank=True, null=True)
+    payment_screenshot = models.ImageField(upload_to="payment_proofs/", blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
