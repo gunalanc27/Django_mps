@@ -11,7 +11,15 @@ def add_review(request, product_slug):
     product = get_object_or_404(Product, slug=product_slug)
 
     if request.method == "POST":
-        rating = request.POST.get("rating")
+        try:
+            rating = int(request.POST.get("rating", 0))
+        except ValueError:
+            rating = 0
+            
+        if rating not in [1, 2, 3, 4, 5]:
+            messages.error(request, "Invalid rating value. Must be between 1 and 5.")
+            return redirect(product.get_absolute_url())
+
         title = request.POST.get("title", "")
         comment = request.POST.get("comment")
 

@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+import uuid
 
 
 class Category(models.Model):
@@ -136,7 +137,6 @@ class Product(models.Model):
         if not self.slug:
             self.slug = slugify(self.name)
         if not self.sku:
-            import uuid
             self.sku = str(uuid.uuid4())[:8].upper()
         super().save(*args, **kwargs)
 

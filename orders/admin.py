@@ -36,6 +36,3 @@ class OrderAdmin(admin.ModelAdmin):
         queryset.update(status="cancelled")
 
 
-@admin.register(OrderItem)
-class OrderItemAdmin(admin.ModelAdmin):
-    list_display = ["order", "product", "price", "quantity"]

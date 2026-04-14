@@ -24,7 +24,7 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-change-me-in-p
 
 DEBUG = os.environ.get("DEBUG", "False") == "True" # why is it true 
 
-ALLOWED_HOSTS = ["*"] # no issue since im at the testing 
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "*").split(",")
 
 
 # Application definition
@@ -120,7 +120,7 @@ else:
 # session engine + other things 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 SESSION_COOKIE_HTTPONLY = True
-SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = not DEBUG
 SESSION_COOKIE_SAMESITE = "Lax"
 
 
@@ -161,7 +161,7 @@ STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
-MEDIA_URL = "media/"
+MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 # Django 6.0-compatible storage configuration
