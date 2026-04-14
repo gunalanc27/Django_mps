@@ -161,12 +161,23 @@ STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
-# Enable WhiteNoise's GZip and caching support
-if not DEBUG:
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+# Django 6.0-compatible storage configuration
+# Cloudinary handles media (uploaded files), WhiteNoise handles static files
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": (
+            "whitenoise.storage.CompressedManifestStaticFilesStorage"
+            if not DEBUG
+            else "django.contrib.staticfiles.storage.StaticFilesStorage"
+        ),
+    },
+}
 
 # UPI Payment Configuration
 UPI_ID = os.environ.get("UPI_ID", "gpzstore@oksbi")
@@ -176,11 +187,7 @@ PAYEE_NAME = os.environ.get("PAYEE_NAME", "GPZ Store")
 GOOGLE_SCRIPT_URL = os.environ.get("GOOGLE_SCRIPT_URL", "")
 
 # Cloudinary — Cloud Storage for uploaded files (fixes Vercel read-only filesystem)
-import cloudinary
-cloudinary.config(
-    cloudinary_url=os.environ.get("CLOUDINARY_URL", "")
-)
-DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+# django-cloudinary-storage reads CLOUDINARY_URL from the environment automatically
 
 CART_SESSION_ID = "cart"
 
