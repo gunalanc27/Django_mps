@@ -180,6 +180,10 @@ STORAGES = {
     },
 }
 
+# Disable strict manifest checking to prevent MissingFileError for missing source maps (.js.map)
+WHITENOISE_MANIFEST_STRICT = False
+
+
 # UPI Payment Configuration
 UPI_ID = os.environ.get("UPI_ID", "gpzstore@oksbi")
 PAYEE_NAME = os.environ.get("PAYEE_NAME", "GPZ Store")
