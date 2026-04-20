@@ -19,7 +19,7 @@
     </div>
 </section>
 
-<section class="py-24 bg-base-100">
+<section class="py-24 ">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto">
             <div class="glass-morphism rounded-[3rem] p-8 lg:p-16 border border-base-200 shadow-2xl relative overflow-hidden">
@@ -41,7 +41,7 @@
                                    {% if current_primary == option.primary %}checked{% endif %}
                                    onchange="updatePreview(this)">
                             
-                            <div class="p-6 rounded-[2rem] border-2 border-base-200 bg-base-100 peer-checked:border-primary peer-checked:bg-primary/5 transition-all group-hover:scale-105 group-hover:shadow-xl">
+                            <div class="p-6 rounded-[2rem] border-2 border-base-200  peer-checked:border-primary peer-checked:bg-primary/5 transition-all group-hover:scale-105 group-hover:shadow-xl">
                                 <div class="flex items-center gap-4 mb-4">
                                     <div class="w-12 h-12 rounded-2xl shadow-inner border border-base-300" style="background-color: {{ option.primary }}"></div>
                                     <div class="w-8 h-8 rounded-xl shadow-inner border border-base-300" style="background-color: {{ option.secondary }}"></div>

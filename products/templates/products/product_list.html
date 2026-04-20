@@ -36,9 +36,9 @@
             </label>
         </div>
     </div>
-</section>
+</section> 
 
-<section class="py-16 bg-base-100">
+<section class="py-16 ">
 
 
     <div class="container mx-auto px-6">
@@ -63,7 +63,7 @@
                 {% if products %}
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {% for product in products %}
-                    <article class="bg-base-100 border border-base-200 rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-6xl hover:shadow-base-200/60 hover:-translate-y-3 transition-all duration-300 group flex flex-col reveal reveal-up delay-{{ forloop.counter|add:1 }}00">
+                    <article class=" border border-base-200 rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-6xl hover:shadow-base-200/60 hover:-translate-y-3 transition-all duration-300 group flex flex-col reveal reveal-up delay-{{ forloop.counter|add:1 }}00">
                         <!-- Image -->
                         <a href="{{ product.get_absolute_url }}" class="block relative overflow-hidden aspect-square bg-base-200/50">
                             {% if product.image %}
@@ -171,7 +171,7 @@
     </div>
     <!-- <div class="drawer-side z-50">
         <label for="filter-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-        <div class="p-10 w-80 min-h-full bg-base-100 text-base-content space-y-10 shadow-2xl">
+        <div class="p-10 w-80 min-h-full  text-base-content space-y-10 shadow-2xl">
             <div class="flex items-center justify-between">
                 <h2 class="text-2xl font-black uppercase italic tracking-tighter">Filters</h2>
                 <label for="filter-drawer" class="btn btn-sm btn-circle btn-ghost">✕</label>

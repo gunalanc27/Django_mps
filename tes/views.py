@@ -5,15 +5,26 @@ def page_viewing(request):
     """
     View to allow users to change the primary, secondary, and background colors of the website.
     The choices are stored in the session.
-    """
+Z    """
     color_options = [
-        {'name': 'Matte Black', 'primary': '#1A1A1A', 'secondary': '#333333', 'background': '#111111'},
         {'name': 'Crisp White', 'primary': '#6D28D9', 'secondary': '#F3F4F6', 'background': '#FFFFFF'},
-        {'name': 'Navy Blue', 'primary': '#1E3A8A', 'secondary': '#3B82F6', 'background': '#0F172A'},
         {'name': 'Dusty Rose', 'primary': '#BE7D5B', 'secondary': '#E5D3C5', 'background': '#FDF4EF'},
         {'name': 'Sage Green', 'primary': '#5E7A4E', 'secondary': '#C1D3B8', 'background': '#F2F7F0'},
-        {'name': 'Deep Burgundies', 'primary': '#4A0E0E', 'secondary': '#800020', 'background': '#1A0505'},
     ]
+
+# 🛒 Premium Store
+# Background: #0F172A
+# Primary: #F97316
+# Secondary: #38BDF8
+# 💼 Luxury Store
+# Background: #0B0B0F
+# Primary: #EAB308
+# Secondary: #A1A1AA
+# ⚡ Modern Tech Store
+# Background: #020617
+# Primary: #6366F1
+# Secondary: #22C55E
+
 
     if request.method == 'POST':
         primary = request.POST.get('primary')

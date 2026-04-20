@@ -96,7 +96,7 @@
                     </div>
                 </div>
                 <!-- Cart dropdown placeholder -->
-                <div tabindex="0" class="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow-xl border border-base-200">
+                <div tabindex="0" class="card card-compact dropdown-content  z-[1] mt-3 w-52 shadow-xl border border-base-200">
                     <div class="card-body">
                         <span class="text-lg font-bold">{{ cart|length }} Items</span>
                         <span class="text-info">Subtotal: ${{ cart.get_total_price }}</span>
@@ -118,7 +118,7 @@
                         </div>
                         <span class="font-semibold text-sm">{{ user.username }}</span>
                     </div>
-                    <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow-xl border border-base-200 mt-2">
+                    <ul tabindex="0" class="dropdown-content menu  rounded-box z-[1] w-52 p-2 shadow-xl border border-base-200 mt-2">
                         <li><a href="{% url 'orders:order_list' %}">My Orders</a></li>
                         <li><a href="{% url 'accounts:profile' %}">Profile</a></li>
                         <li><div class="divider my-0"></div></li>
