@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Page Viewing - Theme Settings{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="bg-primary-gradient text-white py-20 lg:py-28 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+    </div>
+    <div class="container mx-auto px-6 relative z-10 text-center reveal reveal-up">
+        <h1 class="text-4xl lg:text-6xl font-black mb-4 tracking-tight uppercase italic">
+            Page Viewing</h1>
+        <p class="text-xl text-white/80 max-w-2xl mx-auto font-medium leading-relaxed">
+            Customize your browsing experience by selecting your preferred primary and secondary colors.
+        </p>
+    </div>
+</section>
+
+<section class="py-24 ">
+    <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-morphism rounded-[3rem] p-8 lg:p-16 border border-base-200 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px]"></div>
+                
+                <h2 class="text-3xl font-black mb-10 tracking-tight uppercase reveal reveal-up text-center">Select Theme Colors</h2>
+                
+                <form method="post" class="space-y-12">
+                    {% csrf_token %}
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {% for option in color_options %}
+                        <label class="relative group cursor-pointer reveal reveal-up delay-{{ forloop.counter }}00">
+                            <input type="radio" name="theme_selection" class="peer hidden" 
+                                   value="{{ option.name }}" 
+                                   data-primary="{{ option.primary }}" 
+                                   data-secondary="{{ option.secondary }}"
+                                   data-background="{{ option.background }}"
+                                   {% if current_primary == option.primary %}checked{% endif %}
+                                   onchange="updatePreview(this)">
+                            
+                            <div class="p-6 rounded-[2rem] border-2 border-base-200  peer-checked:border-primary peer-checked:bg-primary/5 transition-all group-hover:scale-105 group-hover:shadow-xl">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="w-12 h-12 rounded-2xl shadow-inner border border-base-300" style="background-color: {{ option.primary }}"></div>
+                                    <div class="w-8 h-8 rounded-xl shadow-inner border border-base-300" style="background-color: {{ option.secondary }}"></div>
+                                    <div class="w-6 h-6 rounded-lg shadow-inner border border-base-300" title="Background" style="background-color: {{ option.background }}"></div>
+                                </div>
+                                <h3 class="font-black text-lg uppercase tracking-tight">{{ option.name }}</h3>
+                                <div class="mt-2 opacity-40 text-[10px] font-bold uppercase tracking-widest">
+                                    {{ option.primary }} / {{ option.secondary }}
+                                </div>
+                            </div>
+                            
+                            <!-- Checkmark -->
+                            <div class="absolute -top-3 -right-3 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center opacity-0 peer-checked:opacity-100 transition-opacity shadow-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </label>
+                        {% endfor %}
+                    </div>
+
+                    <input type="hidden" name="primary" id="primary_input" value="{{ current_primary }}">
+                    <input type="hidden" name="secondary" id="secondary_input" value="{{ current_secondary }}">
+                    <input type="hidden" name="background" id="background_input" value="{{ current_background }}">
+
+                    <!-- Live Preview -->
+                    <div class="bg-base-200/50 rounded-[2.5rem] p-8 space-y-6 reveal reveal-up">
+                        <h3 class="text-sm font-black uppercase opacity-40 tracking-[0.2em] text-center">Live Preview</h3>
+                        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                            <div id="preview-background" class="rounded-3xl p-4 flex gap-4 items-center border border-base-200" style="background-color: {{ current_background }}">
+                                <div id="preview-button" class="btn btn-lg px-8 rounded-2xl border-none text-white font-black uppercase tracking-tight shadow-xl" 
+                                     style="background-color: {{ current_primary }}">
+                                    Primary
+                                </div>
+                                <div id="preview-box" class="w-16 h-16 rounded-2xl" style="background-color: {{ current_secondary }}"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center pt-8 reveal reveal-up">
+                        <button type="submit" class="btn bg-primary-gradient border-none text-white btn-xl rounded-full px-16 shadow-2xl shadow-primary/30 font-black tracking-tight uppercase hover:scale-105 transition-all">
+                            Save Theme Settings
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="mt-12 text-center reveal reveal-up">
+                <a href="{% url 'core:home' %}" class="btn btn-ghost rounded-2xl font-bold">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function updatePreview(input) {
+        const primary = input.getAttribute('data-primary');
+        const secondary = input.getAttribute('data-secondary');
+        const background = input.getAttribute('data-background');
+        
+        document.getElementById('primary_input').value = primary;
+        document.getElementById('secondary_input').value = secondary;
+        document.getElementById('background_input').value = background;
+        
+        document.getElementById('preview-button').style.backgroundColor = primary;
+        document.getElementById('preview-box').style.backgroundColor = secondary;
+        document.getElementById('preview-background').style.backgroundColor = background;
+    }
+</script>
+{% endblock %}

@@ -13,7 +13,7 @@
     <div class="container mx-auto px-6 relative z-10">
         <div class="max-w-2xl mx-auto">
             <!-- Auth Card -->
-            <div class="bg-base-100 p-10 md:p-16 rounded-[4rem] border border-base-200 shadow-2xl shadow-base-200 relative animate-in slide-in-from-bottom duration-700">
+            <div class="bg-base-100 p-10 md:p-16 rounded-[4rem] border border-base-200 shadow-2xl shadow-base-200 relative reveal reveal-up">
                 <div class="absolute -top-12 -left-12 w-24 h-24 bg-primary/40 rounded-full blur-3xl"></div>
                 
                 <div class="space-y-12 relative z-10">
@@ -29,7 +29,7 @@
                         {% csrf_token %}
                         <div class="space-y-6">
                             {% for field in form %}
-                            <div class="form-control w-full">
+                            <div class="form-control w-full reveal reveal-up delay-{{ forloop.counter }}00">
                                 <label class="label">
                                     <span class="label-text font-black uppercase tracking-widest text-[10px]">{{ field.label }}</span>
                                 </label>

@@ -5,55 +5,48 @@
 
 {% block content %}
 <!-- Page Header -->
-<section class="bg-gradient-to-br from-[#7C3AED] via-[#4F46E5] to-[#2563EB] text-white py-16 lg:py-20 relative overflow-hidden">
+<section class="bg-primary-gradient text-white py-16 lg:py-20 relative overflow-hidden">
     <div class="absolute inset-0 opacity-10">
         <div class="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
     </div>
-    <div class="container mx-auto px-6 relative z-10 text-center">
+    <div class="container mx-auto px-6 relative z-10 text-center reveal reveal-up pb-8">
         <h1 class="text-4xl lg:text-5xl font-black mb-4 tracking-tight uppercase italic">
             {% if current_category %}{{ current_category.name }}{% else %}All Products{% endif %}
         </h1>
-        <p class="text-white/70 font-medium tracking-widest uppercase text-[10px]">
+        <p class="text-white/70 font-medium tracking-widest uppercase text-[10px] mb-8">
             {{ page_obj.paginator.count }} product{{ page_obj.paginator.count|pluralize }} found
         </p>
-    </div>
-</section>
 
-<section class="py-16 bg-base-100">
-    <div class="drawer drawer-end">
-        <input id="filter-drawer" type="checkbox" class="drawer-toggle" />
-        
-        <div class="drawer-content">
-    <div class="container mx-auto px-6 mb-12">
-        <div class="max-w-2xl mx-auto">
-                        <!-- Search -->
-
-                <form method="get">
-                    <div class="form-control relative">
-                        <input type="text" name="q" value="{{ search_query }}" placeholder="Search products..." 
-                               class="input input-lg rounded-[1.5rem] bg-base-200 border-none font-bold w-full pr-16 focus:ring-2 focus:ring-primary/20 transition-all" />
-                        <button class="btn btn-primary absolute right-2 top-2 rounded-[1rem] btn-sm h-12 px-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M16.65 16.65A7 7 0 1116.65 2.35a7 7 0 010 14.3z"/></svg>
-                        </button>
-                    </div>
-                </form>
-            </div>
+        <div class="max-w-2xl mx-auto flex gap-4">
+            <form method="get" class="flex-grow">
+                <div class="form-control relative">
+                    <input type="text" name="q" value="{{ search_query }}" placeholder="Search products..." 
+                           class="input input-lg rounded-[1.5rem] bg-white/10 hover:bg-white/20 border-white/20 focus:border-white/40 text-white placeholder:text-white/50 font-bold w-full pr-16 transition-all" />
+                    <button class="btn bg-white text-primary absolute right-2 top-2 rounded-[1rem] btn-sm h-12 px-4 hover:scale-105 transition-transform">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M16.65 16.65A7 7 0 1116.65 2.35a7 7 0 010 14.3z"/></svg>
+                    </button>
+                </div>
+            </form>
             
-            <label for="filter-drawer" class="btn btn-lg btn-square rounded-[1.5rem] bg-base-200 border-none hover:bg-primary hover:text-white transition-all">
+            <label for="filter-drawer" class="btn btn-lg btn-square rounded-[1.5rem] bg-white/10 text-white border-white/20 hover:bg-white hover:text-primary hover:scale-105 transition-all flex-none">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
                 </svg>
             </label>
         </div>
     </div>
+</section> 
+
+<section class="py-16 ">
+
 
     <div class="container mx-auto px-6">
         <div class="grid grid-cols-1 gap-12">
             <!-- Products Grid Section -->
             <main class="space-y-10">
                 <!-- Sort Bar -->
-                <div class="flex items-center justify-between gap-4 flex-wrap">
+                <div class="flex items-center justify-between gap-4 flex-wrap reveal reveal-up">
                     <p class="text-sm font-bold opacity-40 uppercase tracking-widest">
                         Showing {{ page_obj.start_index }}–{{ page_obj.end_index }} of {{ page_obj.paginator.count }}
                     </p>
@@ -68,9 +61,9 @@
                 </div>
 
                 {% if products %}
-                <div class="grid grid-cols-1 min-w-232  min-h-224 grid-cols-2  xl:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {% for product in products %}
-                    <article class="bg-base-100 border border-base-200 rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-base-200/60 hover:-translate-y-1 transition-all duration-300 group flex flex-col">
+                    <article class=" border border-base-200 rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-6xl hover:shadow-base-200/60 hover:-translate-y-3 transition-all duration-300 group flex flex-col reveal reveal-up delay-{{ forloop.counter|add:1 }}00">
                         <!-- Image -->
                         <a href="{{ product.get_absolute_url }}" class="block relative overflow-hidden aspect-square bg-base-200/50">
                             {% if product.image %}
@@ -131,7 +124,7 @@
                             <!-- Price -->
                             <div class="mt-auto pt-4 flex items-end justify-between">
                                 <div>
-                                    <p class="text-2xl font-black text-primary tracking-tighter">₹{{ product.price }}</p>
+                                    <p class="text-2xl font-black text-gray-700 tracking-tighter">₹{{ product.price }}</p>
                                     {% if product.is_on_sale %}
                                     <p class="text-xs line-through opacity-30 font-medium">₹{{ product.original_price }}</p>
                                     {% endif %}
@@ -139,7 +132,7 @@
                                 <form action="{{ product.get_add_to_cart_url }}" method="post">
                                     {% csrf_token %}
                                     <input type="hidden" name="quantity" value="1">
-                                    <button type="submit" class="btn btn-primary btn-sm rounded-2xl font-black uppercase tracking-tight shadow-lg shadow-primary/20">
+                                    <button type="submit" class="btn bg-primary-gradient border-none text-white btn-sm rounded-2xl font-black uppercase tracking-tight shadow-lg shadow-gray-500/20">
                                         Add to Cart
                                     </button>
                                 </form>
@@ -157,7 +150,7 @@
                         <a href="?page={{ page_obj.previous_page_number }}" class="join-item btn btn-ghost rounded-2xl">«</a>
                         {% endif %}
                         {% for num in page_obj.paginator.page_range %}
-                        <a href="?page={{ num }}" class="join-item btn rounded-2xl {% if page_obj.number == num %}btn-primary{% else %}btn-ghost{% endif %}">{{ num }}</a>
+                        <a href="?page={{ num }}" class="join-item btn rounded-2xl {% if page_obj.number == num %}bg-primary-gradient border-none text-white{% else %}btn-ghost{% endif %}">{{ num }}</a>
                         {% endfor %}
                         {% if page_obj.has_next %}
                         <a href="?page={{ page_obj.next_page_number }}" class="join-item btn btn-ghost rounded-2xl">»</a>
@@ -176,12 +169,9 @@
             </main>
         </div>
     </div>
-    </div> <!-- End of drawer-content -->
-
-    <!-- Drawer Side - Sidebar Filters -->
     <!-- <div class="drawer-side z-50">
         <label for="filter-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-        <div class="p-10 w-80 min-h-full bg-base-100 text-base-content space-y-10 shadow-2xl">
+        <div class="p-10 w-80 min-h-full  text-base-content space-y-10 shadow-2xl">
             <div class="flex items-center justify-between">
                 <h2 class="text-2xl font-black uppercase italic tracking-tighter">Filters</h2>
                 <label for="filter-drawer" class="btn btn-sm btn-circle btn-ghost">✕</label>

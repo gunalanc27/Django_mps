@@ -13,7 +13,7 @@
     <div class="container mx-auto px-6 relative z-10">
         <div class="max-w-2xl mx-auto">
             <!-- Auth Card -->
-            <div class="bg-base-100 p-10 md:p-16 rounded-[4rem] border border-base-200 shadow-2xl shadow-base-200 relative animate-in zoom-in duration-500">
+            <div class="bg-base-100 p-10 md:p-16 rounded-[4rem] border border-base-200 shadow-2xl shadow-base-200 relative reveal reveal-zoom">
                 <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 animate-pulse"></div>
                 
                 <div class="space-y-10 relative z-10">
@@ -28,7 +28,7 @@
                     <form method="post" class="space-y-8">
                         {% csrf_token %}
                         <div class="space-y-6">
-                            <div class="form-control w-full">
+                            <div class="form-control w-full reveal reveal-up delay-100">
                                 <label class="label"><span class="label-text font-black uppercase tracking-widest text-[10px]">Username</span></label>
                                 <div class="relative group">
                                     <div class="absolute inset-y-0 left-6 flex items-center text-base-content/20 group-focus-within:text-primary transition-colors">
@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                             
-                            <div class="form-control w-full">
+                            <div class="form-control w-full reveal reveal-up delay-200">
                                 <label class="label"><span class="label-text font-black uppercase tracking-widest text-[10px]">Password</span></label>
                                 <div class="relative group">
                                     <div class="absolute inset-y-0 left-6 flex items-center text-base-content/20 group-focus-within:text-primary transition-colors">

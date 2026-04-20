@@ -5,61 +5,80 @@
 
 {% block content %}
 <!-- Hero Section -->
-<section class="relative overflow-hidden bg-gradient-to-br from-[#7C3AED] via-[#4F46E5] to-[#2563EB] text-white pt-20 pb-32 lg:pt-32 lg:pb-48" style="clip-path: ellipse(150% 100% at 50% 0%);">
+
+<!-- all the animtion should happenonly when i scroll through the webpage  -->
+<section class="relative overflow-hidden bg-primary-gradient text-white pt-10 pb-32 lg:pt-22 lg:pb-48"
+    style="clip-path: ellipse(150% 100% at 50% 0%);">
     <div class="container mx-auto px-6 lg:px-12 relative z-10">
         <div class="flex flex-col lg:flex-row items-center gap-16">
             <!-- Text Content -->
-            <div class="w-full lg:w-1/2 space-y-8 animate-in slide-in-from-left duration-700">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+            <div class="w-full lg:w-1/2 space-y-8 reveal reveal-up">
+                <div
+                    class="inline-flex bg-yellow-200 text-yellow-200  items-center gap-2 px-4 py-2 rounded-full glass-morphism">
                     <span class="animate-pulse">✨</span>
-                    <span class="text-sm font-bold tracking-wide uppercase">New Collection 2026</span>
+                    <span class="text-sm animate-pulse font-bold  tracking-wide uppercase">New Collection 2026</span>
                 </div>
-                
-                <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
-                    GPZ Store<br/>
+
+                <h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
+                    GPZ Store<br />
                     <span class="text-yellow-300 font-black">Quality For Your Life</span>
                 </h1>
-                
-                <p class="text-lg lg:text-xl text-white/80 max-w-lg leading-relaxed font-medium">
-                    The ultimate destination for premium gear and lifestyle essentials. From high-end electronics to everyday quality products, we bring you the best.
+
+                <p class="text-base md:text-lg lg:text-xl text-white/80 max-w-lg leading-relaxed font-medium">
+                    The ultimate destination for premium gear and lifestyle essentials. From high-end electronics to
+                    everyday quality products, we bring you the best.
                 </p>
-                
+
                 <div class="flex flex-wrap gap-4 pt-4">
-                    <a href="{% url 'products:product_list' %}" class="btn btn-lg bg-white text-primary border-none hover:bg-white/90 group rounded-full px-8 shadow-xl shadow-black/20">
+                    <a href="{% url 'products:product_list' %}"
+                       class="btn btn-lg bg-white text-gray-800 border-none hover:bg-yellow-400 hover:text-gray-900 group rounded-full px-8 shadow-xl shadow-black/20 transition-all duration-300">
                         Shop Now
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
                     </a>
-                    <a href="{% url 'core:contact' %}" class="btn btn-lg btn-outline text-white border-2 hover:bg-white hover:text-primary rounded-full px-8 underline-none decoration-transparent">
+
+                    <a href="{% url 'core:contact' %}"
+                        class="btn btn-lg btn-outline text-white border-2 hover:bg-yellow-400 hover:text-gray-900 hover:border-yellow-400 rounded-full px-8 transition-all duration-300">
                         Contact now
                     </a>
                 </div>
             </div>
 
             <!-- Hero Image -->
-            <div class="w-full lg:w-1/2 relative animate-in zoom-in duration-1000">
-                <div class="relative rounded-[2.5rem] overflow-hidden shadow-2xl shadow-blue-900/40 rotate-1 transform-gpu hover:rotate-0 transition-transform duration-500 border-4 border-white/10">
-                    <img src="{% static 'images/hero.png' %}" alt="Luxury Store" class="w-full h-auto object-cover">
+            <div class="w-full lg:w-1/2 relative reveal reveal-zoom">
+                <div
+                    class="relative rounded-[2.5rem] overflow-hidden shadow-2xl shadow-blue-900/40 rotate-1 transform-gpu hover:rotate-0 transition-transform duration-500 border-4 border-white/10">
+                    <img src="{% static 'images/hero.jpg' %}" alt="Luxury Store" class="w-full h-auto object-cover">
                     <!-- Glass highlight -->
-                    <div class="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none"></div>
+                    <div class="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none">
+                    </div>
                 </div>
                 <!-- Decorative elements -->
                 <div class="absolute -top-6 -right-6 w-24 h-24 bg-yellow-300 rounded-full blur-3xl opacity-30"></div>
-                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-400 rounded-full blur-3xl opacity-30"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-400 rounded-full blur-3xl opacity-30">
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Assurance Section -->
-<section class="py-32 bg-base-100">
+<section class="py-32 ">
     <div class="container mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-5xl mx-auto text-center">
-            <!-- Item 1 -->
-            <div class="space-y-6 group">
-                <div class="w-20 h-20 mx-auto bg-primary/5 rounded-3xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-content transition-all duration-300 shadow-sm group-hover:shadow-xl group-hover:shadow-primary/20">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+            <!-- Item 1 --> 
+            <div class="space-y-6 group reveal reveal-left">
+                <div
+                    class="w-20 h-20 mx-auto glass-morphism rounded-3xl flex items-center justify-center text-gray-700 group-hover:bg-primary-gradient group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-xl group-hover:shadow-gray-400/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                        <polyline points="16 7 22 7 22 13"></polyline>
+                    </svg>
                 </div>
                 <div class="space-y-2">
                     <h3 class="text-2xl font-extrabold tracking-tight">Latest Trends</h3>
@@ -68,11 +87,15 @@
                     </p>
                 </div>
             </div>
-            
+        
             <!-- Item 2 -->
-            <div class="space-y-6 group">
-                <div class="w-20 h-20 mx-auto bg-primary/5 rounded-3xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-content transition-all duration-300 shadow-sm group-hover:shadow-xl group-hover:shadow-primary/20">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <div class="space-y-6 group reveal reveal-right">
+                <div
+                    class="w-20 h-20 mx-auto glass-morphism rounded-3xl flex items-center justify-center text-gray-700 group-hover:bg-primary-gradient group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-xl group-hover:shadow-gray-400/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
                 </div>
                 <div class="space-y-2">
                     <h3 class="text-2xl font-extrabold tracking-tight">Secure Shopping</h3>
@@ -86,22 +109,31 @@
 </section>
 
 <!-- Category Title -->
-<section class="pb-24 bg-base-100">
+<section class="pb-24 ">
     <div class="container mx-auto px-6 text-center">
-        <h2 class="text-5xl font-black tracking-tight mb-6">Shop by Category</h2>
-        <p class="text-base-content/50 text-xl font-medium mb-16">Explore our wide range of curated collections</p>
-        
+        <h2 class="text-3xl md:text-5xl font-black tracking-tight mb-6">Shop by Category</h2>
+        <p class="text-base-content/50 text-lg md:text-xl font-medium mb-16">Explore our wide range of curated
+            collections</p>
+
         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
             {% for category in categories %}
-            <a href="{{ category.get_absolute_url }}" class="group relative aspect-[4/3] rounded-[2rem] bg-base-200 flex flex-col items-center justify-center overflow-hidden hover:bg-primary transition-all duration-500 shadow-sm hover:shadow-2xl hover:-translate-y-2">
-                <span class="text-xl font-black z-10 group-hover:text-primary-content transition-colors duration-300 text-center px-4">{{ category.name }}</span>
+            <a href="{{ category.get_absolute_url }}"
+                class="group reveal reveal-up delay-{{ forloop.counter|add:1 }}00 relative aspect-[4/3] rounded-[2rem] bg-base-200 flex flex-col items-center justify-center overflow-hidden hover:bg-primary transition-all duration-500 shadow-sm hover:shadow-2xl hover:-translate-y-2">
+                <span
+                    class="text-xl font-black z-10 group-hover:text-primary-content transition-colors duration-300 text-center px-4">{{category.name }}</span>
                 <!-- Background decoration -->
-                <div class="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                <div class="absolute -bottom-4 -right-4 w-12 h-12 bg-black/5 rounded-full group-hover:scale-[10] transition-transform duration-700 pointer-events-none"></div>
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent opacity-0 group-hover:opacity-10 transition-opacity">
+                </div>
+                <div
+                    class="absolute -bottom-4 -right-4 w-12 h-12 bg-black/5 rounded-full group-hover:scale-[10] transition-transform duration-700 pointer-events-none">
+                </div>
             </a>
             {% empty %}
-            <div class="col-span-full h-48 flex items-center justify-center border-4 border-dashed border-base-200 rounded-[3rem] opacity-40">
-                <span class="text-sm font-bold uppercase tracking-[0.3em] text-base-content/40">Discoveries Coming Soon</span>
+            <div
+                class="col-span-full h-48 flex items-center justify-center border-4 border-dashed border-base-200 rounded-[3rem] opacity-40">
+                <span class="text-sm font-bold uppercase tracking-[0.3em] text-base-content/40">Discoveries Coming
+                    Soon</span>
             </div>
             {% endfor %}
         </div>
@@ -130,7 +162,8 @@
         
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
             {% for product in products %}
-            <div class="group bg-base-100 rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-base-200/50 relative flex flex-col">
+            <div class="group 
+         rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-base-200/50 relative flex flex-col">
                 <div class="aspect-square overflow-hidden relative">
                     {% if product.image %}
                     <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -143,7 +176,7 @@
                     {% endif %}
                     
                  Quick add / Discount badge could go here -->
-                    <!-- <div class="absolute top-6 left-6">
+<!-- <div class="absolute top-6 left-6">
                         <div class="badge badge-primary py-3 px-4 rounded-xl font-bold border-none shadow-lg">New Arrival</div>
                     </div>
                 </div>
@@ -166,7 +199,8 @@
             </div>
             {% empty %}
             <div class="col-span-full">
-                <div class="alert shadow-lg bg-base-100 border-base-200 p-8 rounded-[2rem]">
+                <div class="alert shadow-lg 
+             border-base-200 p-8 rounded-[2rem]">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info shrink-0 w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     <div class="space-y-1">
                         <h3 class="font-bold text-lg">Collection Coming Soon!</h3>
@@ -178,26 +212,31 @@
         </div>
     </div>
 </section>
-{% endif %} --> 
+{% endif %} -->
 
 
 
-<!-- CTA Section (Exact Match to Reference) -->
-<section class="py-32 bg-base-100">
-    <div class="container mx-auto px-6">
-        <div class="relative rounded-[4rem] overflow-hidden bg-gradient-to-r from-[#7C3AED] via-[#4F46E5] to-[#2563EB] p-16 lg:p-32 text-center text-white shadow-2xl">
+<!-- CTA Section -->
+<section class="py-32 ">
+    <div class="hover:scale-105 transition-all duration-700 container mx-auto px-6">
+        <div
+            class="relative rounded-[4rem] overflow-hidden bg-primary-gradient p-16 lg:p-32 text-center text-white shadow-2xl">
             <!-- Background mesh -->
             <div class="absolute inset-0 opacity-20 pointer-events-none">
                 <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-white rounded-full blur-[100px]"></div>
-                <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-300 rounded-full blur-[100px]"></div>
+                <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-gray-300 rounded-full blur-[100px]">
+                </div>
             </div>
-            
-            <div class="relative z-10 space-y-10 animate-in fade-in zoom-in duration-1000">
-                <p class="text-xl lg:text-3xl text-white/90 font-bold tracking-tight px-4 max-w-4xl mx-auto leading-relaxed">
+
+            <div class="relative z-10 space-y-10 reveal reveal-zoom">
+                <p
+                    class="text-xl lg:text-3xl text-white/90 font-bold tracking-tight px-4 max-w-4xl mx-auto leading-relaxed">
                     Experience excellence with the best-curated lifestyle products in Tamil Nadu
                 </p>
+                
                 <div class="pt-4">
-                    <a href="{% url 'products:product_list' %}" class="btn btn-lg h-20 bg-white text-primary border-none hover:bg-white/95 rounded-full px-16 shadow-2xl font-black text-xl tracking-tighter uppercase transform hover:scale-105 transition-all">
+                    <a href="{% url 'products:product_list' %}"
+                        class="btn btn-lg h-20 bg-white text-gray-800 border-none hover:bg-yellow-400 hover:text-gray-900 rounded-full px-16 shadow-2xl font-black text-xl tracking-tighter uppercase transform hover:scale-105 transition-all duration-300">
                         View All Products
                     </a>
                 </div>

@@ -5,21 +5,21 @@
 
 {% block content %}
 <!-- Page Header -->
-<section class="bg-gradient-to-br from-[#7C3AED] via-[#4F46E5] to-[#2563EB] text-white py-16 lg:py-20 relative overflow-hidden">
+<section class="bg-primary-gradient text-white py-16 lg:py-20 relative overflow-hidden">
     <div class="absolute inset-0 opacity-10">
         <div class="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
     </div>
-    <div class="container mx-auto px-6 relative z-10 text-center animate-in slide-in-from-bottom duration-700">
+    <div class="container mx-auto px-6 relative z-10 text-center reveal reveal-up">
         <h1 class="text-4xl lg:text-5xl font-black mb-4 tracking-tight uppercase">Your Cart</h1>
         <p class="text-lg text-white/80 font-medium uppercase tracking-widest text-[10px]">Review your selected items</p>
     </div>
 </section>
 
-<section class="py-20 bg-base-100">
+<section class="py-20 ">
     <div class="container mx-auto px-6">
         {% if not cart %}
-        <div class="max-w-2xl mx-auto text-center space-y-8 bg-base-200/50 p-20 rounded-[3rem] border-4 border-dashed border-base-200">
+        <div class="max-w-2xl mx-auto text-center space-y-8 bg-base-200/50 p-20 rounded-[3rem] border-4 border-dashed border-base-200 reveal reveal-up">
             <div class="w-24 h-24 mx-auto rounded-full bg-base-200 flex items-center justify-center text-base-content/10">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
@@ -47,7 +47,7 @@
                     </thead>
                     <tbody class="space-y-4">
                         {% for item in cart %}
-                        <tr class="bg-base-200/30 hover:bg-base-200 transition-colors rounded-[2rem] overflow-hidden">
+                        <tr class="bg-base-200/30 hover:bg-base-200 transition-colors rounded-[2rem] overflow-hidden reveal reveal-up delay-{{ forloop.counter|add:1 }}00">
                             <td class="pl-6 py-8 rounded-l-[2rem]">
                                 <div class="flex items-center gap-6">
                                     <div class="w-20 h-20 rounded-2xl overflow-hidden bg-base-200 flex-shrink-0 animate-in zoom-in duration-500">
@@ -112,7 +112,7 @@
 
             <!-- Order Summary -->
             <div class="xl:col-span-4 space-y-8">
-                <div class="bg-base-100 p-8 md:p-10 rounded-[3rem] border border-base-200 shadow-2xl shadow-base-200/50 space-y-10">
+                <div class=" p-8 md:p-10 rounded-[3rem] border border-base-200 shadow-2xl shadow-base-200/50 space-y-10 reveal reveal-right">
                     <h3 class="text-3xl font-black tracking-tight">Summary</h3>
                     
                     <div class="space-y-6">

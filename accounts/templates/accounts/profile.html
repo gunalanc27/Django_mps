@@ -5,12 +5,12 @@
 
 {% block content %}
 <!-- Page Header -->
-<section class="bg-gradient-to-br from-[#7C3AED] via-[#4F46E5] to-[#2563EB] text-white py-16 lg:py-20 relative overflow-hidden">
+<section class="bg-primary-gradient text-white py-16 lg:py-20 relative overflow-hidden">
     <div class="absolute inset-0 opacity-10">
         <div class="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
     </div>
-    <div class="container mx-auto px-6 relative z-10 text-center animate-in slide-in-from-bottom duration-700">
+    <div class="container mx-auto px-6 relative z-10 text-center reveal reveal-up">
         <h1 class="text-4xl lg:text-5xl font-black mb-4 tracking-tight uppercase italic">My Workspace</h1>
         <p class="text-lg text-white/80 font-medium uppercase tracking-widest text-[10px]">Manage your account and preferences</p>
     </div>
@@ -20,13 +20,13 @@
     <div class="container mx-auto px-6">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
             <!-- Sidebar: User Info Card -->
-            <aside class="lg:col-span-4 space-y-10 sticky top-32">
+            <aside class="lg:col-span-4 space-y-10 sticky top-32 reveal reveal-left">
                 <div class="bg-slate-950 p-10 rounded-[3.5rem] text-white shadow-2xl relative overflow-hidden group">
                     <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-primary/20 to-transparent pointer-events-none"></div>
                     
                     <div class="relative z-10 space-y-10">
                         <!-- User Initial Circle -->
-                        <div class="w-24 h-24 rounded-[1.75rem] bg-gradient-to-br from-[#7C3AED] to-[#2563EB] flex items-center justify-center text-white text-5xl font-black italic shadow-xl shadow-primary/30 animate-in zoom-in duration-700">
+                        <div class="w-24 h-24 rounded-[1.75rem] bg-primary-gradient flex items-center justify-center text-white text-5xl font-black italic shadow-xl shadow-primary/30">
                             {{ user.username|first|upper }}
                         </div>
                         
@@ -57,7 +57,7 @@
                 </div>
                 
                 <!-- Security Tip -->
-                <div class="bg-base-200/50 p-8 rounded-[2.5rem] border border-base-200">
+                <div class="bg-base-200/50 p-8 rounded-[2.5rem] border border-base-200 reveal reveal-up delay-100">
                     <div class="flex items-start gap-4">
                         <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -73,7 +73,7 @@
             </aside>
 
             <!-- Main Content: Personal Information -->
-            <main class="lg:col-span-8 space-y-12 animate-in slide-in-from-right duration-700">
+            <main class="lg:col-span-8 space-y-12 reveal reveal-right">
                 <div class="bg-base-100 p-8 md:p-12 rounded-[4rem] border border-base-200 shadow-2xl shadow-base-200/50">
                     <div class="flex items-center gap-4 mb-12">
                         <div class="w-12 h-1 bg-primary rounded-full"></div>
