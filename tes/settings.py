@@ -83,6 +83,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth" ,
                 "django.contrib.messages.context_processors.messages" ,
                 "cart.cart.cart_context" ,
+                "tes.context_processors.theme_colors" ,
             ] ,
         } ,
     } ,
