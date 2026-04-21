@@ -208,15 +208,20 @@
       </script>
 
       <!-- Review Cards -->
-      <div class="space-y-6">
+      <div class="space-y-6" id="review-list">
         {% for review in reviews %}
-        <div class="p-8  rounded-[2.5rem] border border-base-200 space-y-3">
+        <div class="p-8 rounded-[2.5rem] border border-base-200 space-y-3 review-card {% if forloop.counter > 5 %}hidden{% endif %}">
           <div class="flex items-start justify-between gap-4">
             <div class="space-y-1">
               <div class="flex items-center gap-2">
+                {% if review.user.profile.avatar %}
+                <img src="{{ review.user.profile.avatar.url }}" alt="{{ review.user.username }}"
+                  class="w-8 h-8 rounded-full object-cover border-2 border-primary/20" />
+                {% else %}
                 <div
                   class="w-8 h-8 rounded-full bg-primary-gradient text-white flex items-center justify-center font-black text-sm">
                   {{ review.user.username|first|upper }}</div>
+                {% endif %}
                 <p class="font-black tracking-tight">{{ review.user.username }}</p>
               </div>
               <div class="rating rating-xs">
@@ -234,6 +239,39 @@
         </div>
         {% endfor %}
       </div>
+      
+      {% if reviews|length > 5 %}
+      <div class="flex justify-center mt-8">
+        <button id="see-more-reviews-btn" class="btn btn-outline btn-primary rounded-full font-bold uppercase text-[10px] tracking-widest px-8">
+          See More Reviews
+        </button>
+      </div>
+      <script>
+        document.getElementById('see-more-reviews-btn').addEventListener('click', function() {
+          const hiddenReviews = document.querySelectorAll('.review-card.hidden');
+          const isExpanding = hiddenReviews.length > 0;
+          
+          if (isExpanding) {
+            hiddenReviews.forEach(card => {
+              card.classList.remove('hidden');
+              card.dataset.toggled = 'true';
+            });
+            this.textContent = 'Show Less';
+          } else {
+            const toggledReviews = document.querySelectorAll('.review-card[data-toggled="true"]');
+            toggledReviews.forEach(card => {
+              card.classList.add('hidden');
+              card.dataset.toggled = 'false';
+            });
+            this.textContent = 'See More Reviews';
+            // Scroll back to the top of the reviews list
+            const reviewTop = document.getElementById('review-list').getBoundingClientRect().top + window.scrollY - 100;
+            window.scrollTo({ top: reviewTop, behavior: 'smooth' });
+          }
+        });
+      </script>
+      {% endif %}
+      
       {% else %}
       <p class="text-center opacity-30 font-bold uppercase tracking-widest py-12">No reviews yet. Be the first!</p>
       {% endif %}
