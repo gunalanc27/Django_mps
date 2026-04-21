@@ -5,11 +5,11 @@ def page_viewing(request):
     """
     View to allow users to change the primary, secondary, and background colors of the website.
     The choices are stored in the session.
-Z    """
+    """
     color_options = [
+        {'name': 'Sage Green', 'primary': '#5E7A4E', 'secondary': '#C1D3B8', 'background': '#F2F7F0'},
         {'name': 'Crisp White', 'primary': '#6D28D9', 'secondary': '#F3F4F6', 'background': '#FFFFFF'},
         {'name': 'Dusty Rose', 'primary': '#BE7D5B', 'secondary': '#E5D3C5', 'background': '#FDF4EF'},
-        {'name': 'Sage Green', 'primary': '#5E7A4E', 'secondary': '#C1D3B8', 'background': '#F2F7F0'},
     ]
 
 # 🛒 Premium Store
