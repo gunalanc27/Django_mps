@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Page Viewing - Theme Settings{% endblock %}
+{% block title %}Theme Settings - GPZ Store{% endblock %}
 
 {% block content %}
 <!-- Page Header -->
@@ -11,82 +11,240 @@
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
     </div>
     <div class="container mx-auto px-6 relative z-10 text-center reveal reveal-up">
-        <h1 class="text-4xl lg:text-6xl font-black mb-4 tracking-tight uppercase italic">
-            Page Viewing</h1>
+        <h1 class="text-4xl lg:text-6xl font-black mb-4 tracking-tight uppercase italic">Theme Settings</h1>
         <p class="text-xl text-white/80 max-w-2xl mx-auto font-medium leading-relaxed">
-            Customize your browsing experience by selecting your preferred primary and secondary colors.
+            Pick your own colors for Primary, Secondary, and Background — or choose from curated presets.
         </p>
     </div>
 </section>
 
-<section class="py-24 ">
+<section class="py-24">
     <div class="container mx-auto px-6">
-        <div class="max-w-4xl mx-auto">
+        <div class="max-w-5xl mx-auto">
             <div class="glass-morphism rounded-[3rem] p-6 lg:p-16 border border-base-200 shadow-2xl relative overflow-hidden">
                 <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px]"></div>
-                
-                <h2 class="text-3xl font-black mb-10 tracking-tight uppercase reveal reveal-up text-center">Select Theme Colors</h2>
-                
+
+                <h2 class="text-3xl font-black mb-12 tracking-tight uppercase reveal reveal-up text-center">Choose Your Colors</h2>
+
                 <form method="post" class="space-y-12">
                     {% csrf_token %}
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {% for option in color_options %}
-                        <label class="relative group cursor-pointer reveal reveal-up delay-{{ forloop.counter }}00">
-                            <input type="radio" name="theme_selection" class="peer hidden" 
-                                   value="{{ option.name }}" 
-                                   data-primary="{{ option.primary }}" 
-                                   data-secondary="{{ option.secondary }}"
-                                   data-background="{{ option.background }}"
-                                   {% if current_primary == option.primary %}checked{% endif %}
-                                   onchange="updatePreview(this)">
-                            
-                            <div class="p-6 rounded-[2rem] border-2 border-base-200  peer-checked:border-primary peer-checked:bg-primary/5 transition-all group-hover:scale-105 group-hover:shadow-xl">
-                                <div class="flex items-center gap-4 mb-4">
-                                    <div class="w-12 h-12 rounded-2xl shadow-inner border border-base-300" style="background-color: {{ option.primary }}"></div>
-                                    <div class="w-8 h-8 rounded-xl shadow-inner border border-base-300" style="background-color: {{ option.secondary }}"></div>
-                                    <div class="w-6 h-6 rounded-lg shadow-inner border border-base-300" title="Background" style="background-color: {{ option.background }}"></div>
-                                </div>
-                                <h3 class="font-black text-lg uppercase tracking-tight">{{ option.name }}</h3>
-                                <div class="mt-2 opacity-40 text-[10px] font-bold uppercase tracking-widest">
-                                    {{ option.primary }} / {{ option.secondary }}
-                                </div>
-                            </div>
-                            
-                            <!-- Checkmark -->
-                            <div class="absolute -top-3 -right-3 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center opacity-0 peer-checked:opacity-100 transition-opacity shadow-lg">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </label>
-                        {% endfor %}
-                    </div>
-                    <input type="hidden" name="primary" id="primary_input" value="{{ current_primary }}">
-                    <input type="hidden" name="secondary" id="secondary_input" value="{{ current_secondary }}">
+                    <!-- Hidden inputs driven by JS -->
+                    <input type="hidden" name="primary"    id="primary_input"    value="{{ current_primary }}">
+                    <input type="hidden" name="secondary"  id="secondary_input"  value="{{ current_secondary }}">
                     <input type="hidden" name="background" id="background_input" value="{{ current_background }}">
-                    <!-- Live Preview -->
-                    <div class="bg-base-200/50 rounded-[2.5rem] p-8 space-y-6 reveal reveal-up">
-                        <h3 class="text-sm font-black uppercase opacity-40 tracking-[0.2em] text-center">Live Preview</h3>
+
+                    <!-- THREE COLOR SELECTORS -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+                        <!-- PRIMARY COLOR -->
+                        <div class="space-y-5 reveal reveal-up">
+                            <div class="flex items-center gap-3">
+                                <div id="dot-primary" class="w-6 h-6 rounded-full border-2 border-white shadow-lg transition-all duration-300" style="background-color:{{ current_primary }}"></div>
+                                <h3 class="font-black text-lg uppercase tracking-wider">Primary</h3>
+                            </div>
+                            <p class="text-xs opacity-50 font-semibold uppercase tracking-widest">Buttons · Accents · Highlights</p>
+                            <div class="flex flex-wrap gap-2">
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#7C3AED" data-target="primary" data-color="#7C3AED" title="#7C3AED"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#2563EB" data-target="primary" data-color="#2563EB" title="#2563EB"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#DC2626" data-target="primary" data-color="#DC2626" title="#DC2626"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#EA580C" data-target="primary" data-color="#EA580C" title="#EA580C"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#D97706" data-target="primary" data-color="#D97706" title="#D97706"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#16A34A" data-target="primary" data-color="#16A34A" title="#16A34A"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#0891B2" data-target="primary" data-color="#0891B2" title="#0891B2"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#DB2777" data-target="primary" data-color="#DB2777" title="#DB2777"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#F97316" data-target="primary" data-color="#F97316" title="#F97316"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#EAB308" data-target="primary" data-color="#EAB308" title="#EAB308"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#6366F1" data-target="primary" data-color="#6366F1" title="#6366F1"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#5E7A4E" data-target="primary" data-color="#5E7A4E" title="#5E7A4E"></button>
+                            </div>
+                            <!-- Custom picker -->
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="color" id="picker-primary" class="sr-only" value="{{ current_primary }}" oninput="applyColor('primary', this.value)">
+                                <div id="picker-primary-preview"
+                                     class="w-12 h-12 rounded-2xl border-2 border-base-300 group-hover:border-primary transition-colors shadow-inner cursor-pointer"
+                                     style="background-color:{{ current_primary }}"
+                                     onclick="document.getElementById('picker-primary').click()"></div>
+                                <div>
+                                    <p class="text-xs font-bold uppercase tracking-widest opacity-60">Custom Color</p>
+                                    <p class="text-sm font-bold font-mono" id="label-primary">{{ current_primary }}</p>
+                                </div>
+                            </label>
+                        </div>
+
+                        <!-- SECONDARY COLOR -->
+                        <div class="space-y-5 reveal reveal-up delay-200">
+                            <div class="flex items-center gap-3">
+                                <div id="dot-secondary" class="w-6 h-6 rounded-full border-2 border-white shadow-lg transition-all duration-300" style="background-color:{{ current_secondary }}"></div>
+                                <h3 class="font-black text-lg uppercase tracking-wider">Secondary</h3>
+                            </div>
+                            <p class="text-xs opacity-50 font-semibold uppercase tracking-widest">Badges · Icons · Accents</p>
+                            <div class="flex flex-wrap gap-2">
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-base-300 hover:scale-110 transition-all shadow-md" style="background:#F3F4F6" data-target="secondary" data-color="#F3F4F6" title="#F3F4F6"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#E5E7EB" data-target="secondary" data-color="#E5E7EB" title="#E5E7EB"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#BFDBFE" data-target="secondary" data-color="#BFDBFE" title="#BFDBFE"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#BBF7D0" data-target="secondary" data-color="#BBF7D0" title="#BBF7D0"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#FED7AA" data-target="secondary" data-color="#FED7AA" title="#FED7AA"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#FECACA" data-target="secondary" data-color="#FECACA" title="#FECACA"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#DDD6FE" data-target="secondary" data-color="#DDD6FE" title="#DDD6FE"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#38BDF8" data-target="secondary" data-color="#38BDF8" title="#38BDF8"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#22C55E" data-target="secondary" data-color="#22C55E" title="#22C55E"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#A1A1AA" data-target="secondary" data-color="#A1A1AA" title="#A1A1AA"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#C1D3B8" data-target="secondary" data-color="#C1D3B8" title="#C1D3B8"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#FBCFE8" data-target="secondary" data-color="#FBCFE8" title="#FBCFE8"></button>
+                            </div>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="color" id="picker-secondary" class="sr-only" value="{{ current_secondary }}" oninput="applyColor('secondary', this.value)">
+                                <div id="picker-secondary-preview"
+                                     class="w-12 h-12 rounded-2xl border-2 border-base-300 group-hover:border-primary transition-colors shadow-inner cursor-pointer"
+                                     style="background-color:{{ current_secondary }}"
+                                     onclick="document.getElementById('picker-secondary').click()"></div>
+                                <div>
+                                    <p class="text-xs font-bold uppercase tracking-widest opacity-60">Custom Color</p>
+                                    <p class="text-sm font-bold font-mono" id="label-secondary">{{ current_secondary }}</p>
+                                </div>
+                            </label>
+                        </div>
+
+                        <!-- BACKGROUND COLOR -->
+                        <div class="space-y-5 reveal reveal-up delay-300">
+                            <div class="flex items-center gap-3">
+                                <div id="dot-background" class="w-6 h-6 rounded-full border-2 border-base-300 shadow-lg transition-all duration-300" style="background-color:{{ current_background }}"></div>
+                                <h3 class="font-black text-lg uppercase tracking-wider">Background</h3>
+                            </div>
+                            <p class="text-xs opacity-50 font-semibold uppercase tracking-widest">Page base color</p>
+                            <div class="flex flex-wrap gap-2">
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-base-300 hover:scale-110 transition-all shadow-md" style="background:#FFFFFF" data-target="background" data-color="#FFFFFF" title="#FFFFFF"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#F3F0F0" data-target="background" data-color="#F3F0F0" title="#F3F0F0"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#F8F9FA" data-target="background" data-color="#F8F9FA" title="#F8F9FA"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#FDF4EF" data-target="background" data-color="#FDF4EF" title="#FDF4EF"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#F0F4FF" data-target="background" data-color="#F0F4FF" title="#F0F4FF"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#F2F7F0" data-target="background" data-color="#F2F7F0" title="#F2F7F0"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#FFF9F0" data-target="background" data-color="#FFF9F0" title="#FFF9F0"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#0F172A" data-target="background" data-color="#0F172A" title="#0F172A"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#020617" data-target="background" data-color="#020617" title="#020617"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#0B0B0F" data-target="background" data-color="#0B0B0F" title="#0B0B0F"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#1A1A2E" data-target="background" data-color="#1A1A2E" title="#1A1A2E"></button>
+                                <button type="button" class="swatch w-9 h-9 rounded-xl border-2 border-transparent hover:scale-110 transition-all shadow-md" style="background:#111827" data-target="background" data-color="#111827" title="#111827"></button>
+                            </div>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="color" id="picker-background" class="sr-only" value="{{ current_background }}" oninput="applyColor('background', this.value)">
+                                <div id="picker-background-preview"
+                                     class="w-12 h-12 rounded-2xl border-2 border-base-300 group-hover:border-primary transition-colors shadow-inner cursor-pointer"
+                                     style="background-color:{{ current_background }}"
+                                     onclick="document.getElementById('picker-background').click()"></div>
+                                <div>
+                                    <p class="text-xs font-bold uppercase tracking-widest opacity-60">Custom Color</p>
+                                    <p class="text-sm font-bold font-mono" id="label-background">{{ current_background }}</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- QUICK PRESETS -->
+                    <div class="reveal reveal-up">
+                        <h3 class="text-xs font-black uppercase tracking-[0.2em] opacity-40 mb-5 text-center">Quick Presets</h3>
+                        <div class="flex flex-wrap gap-3 justify-center">
+                            <button type="button" class="preset-btn px-4 py-2 rounded-2xl border-2 border-base-200 hover:border-primary text-sm font-bold flex items-center gap-2 transition-all hover:scale-105"
+                                data-primary="#7C3AED" data-secondary="#F3F0F0" data-background="#F3F0F0">
+                                <span class="flex gap-1">
+                                    <span class="w-4 h-4 rounded-full inline-block border border-base-200" style="background:#7C3AED"></span>
+                                    <span class="w-4 h-4 rounded-full inline-block border border-base-200" style="background:#F3F0F0"></span>
+                                </span>
+                                Default Purple
+                            </button>
+                            <button type="button" class="preset-btn px-4 py-2 rounded-2xl border-2 border-base-200 hover:border-primary text-sm font-bold flex items-center gap-2 transition-all hover:scale-105"
+                                data-primary="#2563EB" data-secondary="#BFDBFE" data-background="#F0F4FF">
+                                <span class="flex gap-1">
+                                    <span class="w-4 h-4 rounded-full inline-block" style="background:#2563EB"></span>
+                                    <span class="w-4 h-4 rounded-full inline-block" style="background:#BFDBFE"></span>
+                                </span>
+                                Ocean Blue
+                            </button>
+                            <button type="button" class="preset-btn px-4 py-2 rounded-2xl border-2 border-base-200 hover:border-primary text-sm font-bold flex items-center gap-2 transition-all hover:scale-105"
+                                data-primary="#F97316" data-secondary="#38BDF8" data-background="#0F172A">
+                                <span class="flex gap-1">
+                                    <span class="w-4 h-4 rounded-full inline-block" style="background:#F97316"></span>
+                                    <span class="w-4 h-4 rounded-full inline-block" style="background:#38BDF8"></span>
+                                </span>
+                                Premium Dark
+                            </button>
+                            <button type="button" class="preset-btn px-4 py-2 rounded-2xl border-2 border-base-200 hover:border-primary text-sm font-bold flex items-center gap-2 transition-all hover:scale-105"
+                                data-primary="#EAB308" data-secondary="#A1A1AA" data-background="#0B0B0F">
+                                <span class="flex gap-1">
+                                    <span class="w-4 h-4 rounded-full inline-block" style="background:#EAB308"></span>
+                                    <span class="w-4 h-4 rounded-full inline-block" style="background:#A1A1AA"></span>
+                                </span>
+                                Luxury Gold
+                            </button>
+                            <button type="button" class="preset-btn px-4 py-2 rounded-2xl border-2 border-base-200 hover:border-primary text-sm font-bold flex items-center gap-2 transition-all hover:scale-105"
+                                data-primary="#6366F1" data-secondary="#22C55E" data-background="#020617">
+                                <span class="flex gap-1">
+                                    <span class="w-4 h-4 rounded-full inline-block" style="background:#6366F1"></span>
+                                    <span class="w-4 h-4 rounded-full inline-block" style="background:#22C55E"></span>
+                                </span>
+                                Modern Tech
+                            </button>
+                            <button type="button" class="preset-btn px-4 py-2 rounded-2xl border-2 border-base-200 hover:border-primary text-sm font-bold flex items-center gap-2 transition-all hover:scale-105"
+                                data-primary="#5E7A4E" data-secondary="#C1D3B8" data-background="#F2F7F0">
+                                <span class="flex gap-1">
+                                    <span class="w-4 h-4 rounded-full inline-block" style="background:#5E7A4E"></span>
+                                    <span class="w-4 h-4 rounded-full inline-block" style="background:#C1D3B8"></span>
+                                </span>
+                                Sage Green
+                            </button>
+                            <button type="button" class="preset-btn px-4 py-2 rounded-2xl border-2 border-base-200 hover:border-primary text-sm font-bold flex items-center gap-2 transition-all hover:scale-105"
+                                data-primary="#DB2777" data-secondary="#FBCFE8" data-background="#FFF0F8">
+                                <span class="flex gap-1">
+                                    <span class="w-4 h-4 rounded-full inline-block" style="background:#DB2777"></span>
+                                    <span class="w-4 h-4 rounded-full inline-block" style="background:#FBCFE8"></span>
+                                </span>
+                                Dusty Rose
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- LIVE PREVIEW -->
+                    <div class="bg-base-200/50 rounded-[2.5rem] p-8 space-y-4 reveal reveal-up">
+                        <h3 class="text-xs font-black uppercase opacity-40 tracking-[0.2em] text-center">Live Preview</h3>
                         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                            <div id="preview-background" class="rounded-3xl p-4 flex gap-4 items-center border border-base-200" style="background-color: {{ current_background }}">
-                                <div id="preview-button" class="btn btn-md sm:btn-lg px-6 sm:px-8 rounded-2xl border-none text-white font-black uppercase tracking-tight shadow-xl" 
-                                     style="background-color: {{ current_primary }}">
+                            <div id="preview-background" class="rounded-3xl p-5 flex gap-4 items-center border border-base-200 transition-all duration-500"
+                                 style="background-color:{{ current_background }}">
+                                <div id="preview-button"
+                                     class="btn btn-md sm:btn-lg px-6 sm:px-8 rounded-2xl border-none text-white font-black uppercase tracking-tight shadow-xl transition-all duration-500"
+                                     style="background-color:{{ current_primary }}">
                                     Primary
                                 </div>
-                                <div id="preview-box" class="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl" style="background-color: {{ current_secondary }}"></div>
+                                <div id="preview-box"
+                                     class="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl border border-base-200 transition-all duration-500"
+                                     style="background-color:{{ current_secondary }}"></div>
+                            </div>
+                        </div>
+                        <!-- Current color labels -->
+                        <div class="flex flex-wrap justify-center gap-6 pt-2">
+                            <div class="text-center">
+                                <p class="text-[10px] uppercase tracking-widest opacity-40 font-bold">Primary</p>
+                                <p class="text-xs font-bold font-mono" id="preview-label-primary">{{ current_primary }}</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-[10px] uppercase tracking-widest opacity-40 font-bold">Secondary</p>
+                                <p class="text-xs font-bold font-mono" id="preview-label-secondary">{{ current_secondary }}</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-[10px] uppercase tracking-widest opacity-40 font-bold">Background</p>
+                                <p class="text-xs font-bold font-mono" id="preview-label-background">{{ current_background }}</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="flex justify-center pt-8">
+                    <!-- Save -->
+                    <div class="flex justify-center pt-4">
                         <button type="submit" class="btn bg-primary-gradient border-none text-white btn-lg rounded-full px-8 sm:px-16 shadow-2xl shadow-primary/30 font-black tracking-tight uppercase hover:scale-105 transition-all w-full sm:w-auto">
                             Save Theme Settings
                         </button>
                     </div>
                 </form>
             </div>
-            
+
             <div class="mt-12 text-center reveal reveal-up">
                 <a href="{% url 'core:home' %}" class="btn btn-ghost rounded-2xl font-bold">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -100,18 +258,75 @@
 </section>
 
 <script>
-    function updatePreview(input) {
-        const primary = input.getAttribute('data-primary');
-        const secondary = input.getAttribute('data-secondary');
-        const background = input.getAttribute('data-background');
-        
-        document.getElementById('primary_input').value = primary;
-        document.getElementById('secondary_input').value = secondary;
-        document.getElementById('background_input').value = background;
-        
-        document.getElementById('preview-button').style.backgroundColor = primary;
-        document.getElementById('preview-box').style.backgroundColor = secondary;
-        document.getElementById('preview-background').style.backgroundColor = background;
+    // Track current state
+    const state = {
+        primary:    '{{ current_primary }}',
+        secondary:  '{{ current_secondary }}',
+        background: '{{ current_background }}'
+    };
+
+    function applyColor(target, color) {
+        state[target] = color;
+
+        // Hidden inputs
+        document.getElementById(target + '_input').value = color;
+
+        // Sync color picker
+        const picker = document.getElementById('picker-' + target);
+        if (picker) picker.value = color;
+
+        // Picker preview box
+        const preview = document.getElementById('picker-' + target + '-preview');
+        if (preview) preview.style.backgroundColor = color;
+
+        // Label in selector
+        const label = document.getElementById('label-' + target);
+        if (label) label.textContent = color;
+
+        // Dot indicator
+        const dot = document.getElementById('dot-' + target);
+        if (dot) dot.style.backgroundColor = color;
+
+        // Preview section
+        if (target === 'primary') {
+            document.getElementById('preview-button').style.backgroundColor = color;
+            document.getElementById('preview-label-primary').textContent = color;
+        }
+        if (target === 'secondary') {
+            document.getElementById('preview-box').style.backgroundColor = color;
+            document.getElementById('preview-label-secondary').textContent = color;
+        }
+        if (target === 'background') {
+            document.getElementById('preview-background').style.backgroundColor = color;
+            document.getElementById('preview-label-background').textContent = color;
+        }
+
+        // Highlight active swatch for this target
+        document.querySelectorAll('.swatch[data-target="' + target + '"]').forEach(btn => {
+            const match = btn.dataset.color.toLowerCase() === color.toLowerCase();
+            btn.style.borderColor  = match ? color : 'transparent';
+            btn.style.boxShadow    = match ? '0 0 0 3px ' + color + '44' : '';
+            btn.style.transform    = match ? 'scale(1.20)' : '';
+        });
     }
+
+    // Swatch buttons
+    document.querySelectorAll('.swatch').forEach(btn => {
+        btn.addEventListener('click', () => applyColor(btn.dataset.target, btn.dataset.color));
+    });
+
+    // Preset buttons
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            applyColor('primary',    btn.dataset.primary);
+            applyColor('secondary',  btn.dataset.secondary);
+            applyColor('background', btn.dataset.background);
+        });
+    });
+
+    // Initialise swatch highlights for current saved colors on load
+    document.addEventListener('DOMContentLoaded', () => {
+        ['primary', 'secondary', 'background'].forEach(t => applyColor(t, state[t]));
+    });
 </script>
 {% endblock %}
