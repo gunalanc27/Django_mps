@@ -16,7 +16,8 @@ class Order(models.Model):
     ]
 
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="orders"
+        settings.AUTH_USER_MODEL, on_delete=models.SET_NULL,
+        null=True, blank=True, related_name="orders"
     )
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -46,7 +47,8 @@ class Order(models.Model):
         ordering = ["-created_at"]
 
     def __str__(self):
-        return f"Order #{self.id} - {self.user.username}"
+        username = self.user.username if self.user else "Guest"
+        return f"Order #{self.id} - {username}"
 
 
 class OrderItem(models.Model):
