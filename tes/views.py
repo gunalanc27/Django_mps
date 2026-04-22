@@ -40,8 +40,8 @@ def page_viewing(request):
 
     context = {
         'color_options': color_options,
-        'current_primary': request.session.get('primary_color', '#7C3AED'),
-        'current_secondary': request.session.get('secondary_color', '#F3F0F0'),
-        'current_background': request.session.get('background_color', '#F3F0F0'),
+        'current_primary': request.session.get('primary_color', '#004f00'),
+        'current_secondary': request.session.get('secondary_color', '#00591c'),
+        'current_background': request.session.get('background_color', '#deffea'),
     }
     return render(request, 'page_viewing.html', context)
