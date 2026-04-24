@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}{{ product.name }} - tes{% endblock %}
+{% block title %}{{ product.name }} - GPZ Store{% endblock %}
 
 {% block content %}
-<div class="bg-base-100 py-12">
+<div class="py-12">
   <div class="container mx-auto px-6">
 
     <!-- Breadcrumb -->
-    <nav class="breadcrumbs text-xs font-bold opacity-40 uppercase tracking-wider mb-10">
+    <nav class="breadcrumbs text-xs font-bold opacity-40 uppercase tracking-wider mb-10 reveal reveal-up">
       <ul>
         <li><a href="{% url 'products:product_list' %}">Products</a></li>
         <li><a href="{{ product.category.get_absolute_url }}">{{ product.category.name }}</a></li>
@@ -17,16 +17,22 @@
     </nav>
 
     <!-- Main Product Section -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
 
       <!-- Image Gallery -->
-      <div class="space-y-4">
-        <div class="rounded-[3rem] overflow-hidden bg-base-200/50 aspect-square flex items-center justify-center border border-base-200">
+      <div class="space-y-4 reveal reveal-left">
+        <div
+          class="rounded-[3rem] overflow-hidden bg-base-200/50 aspect-square flex items-center justify-center border border-base-200">
           {% if product.image %}
-          <img id="main-image" src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover"/>
+          <img id="main-image" src="{{ product.image.url }}" alt="{{ product.name }}"
+            class="w-full h-full object-cover" />
           {% else %}
           <div class="text-base-content/20 text-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 mx-auto" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
             <p class="text-sm mt-2 font-bold">No Image</p>
           </div>
           {% endif %}
@@ -37,8 +43,8 @@
         <div class="grid grid-cols-4 gap-3">
           {% for url in product.image_gallery %}
           <button onclick="document.getElementById('main-image').src='{{ url }}'"
-                  class="rounded-2xl overflow-hidden aspect-square bg-base-200 border-2 border-transparent hover:border-primary transition-all">
-            <img src="{{ url }}" alt="Gallery" class="w-full h-full object-cover"/>
+            class="rounded-2xl overflow-hidden aspect-square bg-base-200 border-2 border-transparent hover:border-primary transition-all">
+            <img src="{{ url }}" alt="Gallery" class="w-full h-full object-cover" />
           </button>
           {% endfor %}
         </div>
@@ -46,20 +52,23 @@
       </div>
 
       <!-- Product Info -->
-      <div class="space-y-8">
+      <div class="space-y-8 reveal reveal-right">
         <!-- Badge Row -->
         <div class="flex flex-wrap items-center gap-3">
-          {% if product.brand %}<span class="badge badge-primary rounded-xl font-black uppercase tracking-widest text-[10px] px-4 py-3">{{ product.brand }}</span>{% endif %}
-          <span class="badge {% if product.availability_status == 'In Stock' %}badge-success{% elif product.availability_status == 'Out of Stock' %}badge-error{% else %}badge-warning{% endif %} rounded-xl font-black uppercase tracking-widest text-[10px] px-4 py-3">
+          {% if product.brand %}<span
+            class="badge bg-primary-gradient border-none text-white rounded-xl font-black uppercase tracking-widest text-[10px] px-4 py-3">{{product.brand }}</span>{% endif %}
+          <span
+            class="badge {% if product.availability_status == 'In Stock' %}badge-success{% elif product.availability_status == 'Out of Stock' %}badge-error{% else %}badge-warning{% endif %} rounded-xl font-black uppercase tracking-widest text-[10px] px-4 py-3">
             {{ product.availability_status }}
           </span>
-          {% if product.is_on_sale %}<span class="badge badge-error rounded-xl font-black uppercase tracking-widest text-[10px] px-4 py-3">{{ product.discount_percentage }}% OFF</span>{% endif %}
+          {% if product.is_on_sale %}<span
+            class="badge badge-error rounded-xl font-black uppercase tracking-widest text-[10px] px-4 py-3">{{product.discount_percentage }}% OFF</span>{% endif %}
         </div>
 
         <div class="space-y-2">
-          {% if product.model_number %}<p class="text-[10px] font-black opacity-30 uppercase tracking-[0.2em]">Model: {{ product.model_number }}</p>{% endif %}
-          <h1 class="text-4xl lg:text-5xl font-black tracking-tighter leading-tight">{{ product.name }}</h1>
-          {% if product.short_description %}<p class="text-base opacity-60 leading-relaxed">{{ product.short_description }}</p>{% endif %}
+          {% if product.model_number %}<p class="text-[10px] font-black opacity-30 uppercase tracking-[0.2em]">Model: {{product.model_number }}</p>{% endif %}
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter leading-tight">{{ product.name }}</h1>
+          {% if product.short_description %}<p class="text-base opacity-60 leading-relaxed">{{ product.short_description}}</p>{% endif %}
         </div>
 
         <!-- Rating Summary -->
@@ -68,21 +77,24 @@
           <span class="text-4xl font-black">{{ product.average_rating }}</span>
           <div>
             <div class="rating rating-sm">
+              {% with avg=product.average_rating|floatformat:"0" %}
               {% for i in "12345" %}
-              <input type="radio" class="mask mask-star-2 bg-amber-400" disabled
-                     {% if forloop.counter == product.average_rating|floatformat:"0"|add:"0" %}checked{% endif %}/>
+              <input type="radio" class="mask mask-star-2 bg-amber-400" disabled {% if forloop.counter|stringformat:"s" == avg %}checked{% endif %} />
               {% endfor %}
+              {% endwith %}
             </div>
-            <p class="text-[10px] font-black opacity-40 uppercase tracking-widest mt-0.5">{{ product.review_count }} review{{ product.review_count|pluralize }}</p>
+            <p class="text-[10px] font-black opacity-40 uppercase tracking-widest mt-0.5">{{ product.review_count }}
+              review{{ product.review_count|pluralize }}</p>
           </div>
         </div>
         {% endif %}
 
         <!-- Price -->
         <div class="space-y-1">
-          <p class="text-5xl font-black tracking-tighter text-primary">₹{{ product.price }}</p>
+          <p class="text-5xl font-black tracking-tighter text-base-content">₹{{ product.price }}</p>
           {% if product.is_on_sale %}
-          <p class="text-lg line-through opacity-30 font-medium">₹{{ product.original_price }} <span class="text-error no-underline">You save ₹{{ product.original_price|floatformat:"0" }}</span></p>
+          <p class="text-lg line-through opacity-30 font-medium">₹{{ product.original_price }} <span
+              class="text-error no-underline">You save ₹{{ product.original_price|floatformat:"0" }}</span></p>
           {% endif %}
           <p class="text-[10px] font-bold opacity-30 uppercase">Incl. of all taxes</p>
         </div>
@@ -91,39 +103,44 @@
         {% if product.tags.all %}
         <div class="flex flex-wrap gap-2">
           {% for tag in product.tags.all %}
-          <a href="{% url 'products:product_list' %}?tag={{ tag.slug }}" class="badge badge-ghost rounded-xl border border-base-300 px-3 py-3 text-[10px] font-black uppercase hover:border-primary hover:text-primary transition-colors">{{ tag.name }}</a>
+          <a href="{% url 'products:product_list' %}?tag={{ tag.slug }}"
+            class="badge badge-ghost rounded-xl border border-base-300 px-3 py-3 text-[10px] font-black uppercase hover:border-primary hover:text-primary transition-colors">{{ tag.name }}</a>
           {% endfor %}
         </div>
         {% endif %}
 
         <!-- SKU -->
-        {% if product.sku %}<p class="text-[10px] opacity-30 font-bold uppercase tracking-wider">SKU: {{ product.sku }}</p>{% endif %}
+        {% if product.sku %}<p class="text-[10px] opacity-30 font-bold uppercase tracking-wider">SKU: {{ product.sku }}
+        </p>{% endif %}
 
         <!-- Cart Actions -->
         {% if product.is_available %}
         <form action="{{ product.get_add_to_cart_url }}" method="post" class="flex gap-4 pt-4">
           {% csrf_token %}
           <input type="hidden" name="quantity" value="1">
-          <button type="submit" class="btn btn-primary btn-lg rounded-[1.5rem] flex-1 h-20 text-xl font-black uppercase shadow-2xl shadow-primary/20 hover:scale-[1.02] transition-transform">
+          <button type="submit"
+            class="btn bg-primary-gradient border-none text-white btn-lg rounded-[1.5rem] flex-1 h-20 text-xl font-black uppercase shadow-2xl shadow-primary/20 hover:scale-[1.02] transition-transform">
             Add to Cart
           </button>
         </form>
         {% else %}
-        <button disabled class="btn btn-lg rounded-[1.5rem] w-full h-20 text-xl font-black uppercase opacity-30">Unavailable</button>
+        <button disabled
+          class="btn btn-lg rounded-[1.5rem] w-full h-20 text-xl font-black uppercase opacity-30">Unavailable</button>
         {% endif %}
       </div>
     </div>
 
     <!-- Specifications -->
     {% if spec_items %}
-    <section class="mt-24 space-y-8">
+    <section class="mt-24 space-y-8 reveal reveal-up">
       <div class="flex items-center gap-4">
-        <div class="w-1.5 h-10 bg-primary rounded-full"></div>
+        <div class="w-1.5 h-10 bg-primary-gradient rounded-full"></div>
         <h2 class="text-3xl font-black tracking-tight uppercase italic">Specifications</h2>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
         {% for key, value in spec_items %}
-        <div class="flex justify-between items-center p-4 rounded-2xl border border-base-200 hover:bg-base-200/30 transition-colors">
+        <div
+          class="flex justify-between items-center p-4 rounded-2xl border border-base-200 hover:bg-base-200/30 transition-colors">
           <span class="text-[11px] font-black uppercase tracking-widest opacity-50">{{ key }}</span>
           <span class="font-bold text-right max-w-[55%]">{{ value }}</span>
         </div>
@@ -134,9 +151,9 @@
 
     <!-- Long Description -->
     {% if product.long_description %}
-    <section class="mt-24 space-y-8">
+    <section class="mt-24 space-y-8 reveal reveal-up">
       <div class="flex items-center gap-4">
-        <div class="w-1.5 h-10 bg-primary rounded-full"></div>
+        <div class="w-1.5 h-10 bg-primary-gradient rounded-full"></div>
         <h2 class="text-3xl font-black tracking-tight uppercase italic">About This Product</h2>
       </div>
       <div class="prose prose-lg max-w-none text-base-content/70 leading-relaxed">{{ product.long_description }}</div>
@@ -147,33 +164,36 @@
     <section class="mt-24 space-y-12">
       <div class="flex items-center justify-between flex-wrap gap-4">
         <div class="flex items-center gap-4">
-          <div class="w-1.5 h-10 bg-primary rounded-full"></div>
-          <h2 class="text-3xl font-black tracking-tight uppercase italic">Reviews</h2>
+          <div class="w-1.5 h-10 bg-primary-gradient rounded-full"></div>
+          <h2 class="text-2xl md:text-3xl font-black tracking-tight uppercase italic reveal reveal-up">Reviews</h2>
         </div>
         {% if user.is_authenticated and not user_review %}
-        <a href="#write-review" class="btn btn-outline btn-primary rounded-full font-bold uppercase text-[10px] tracking-widest">Write a Review</a>
+        <a href="#write-review"
+          class="btn btn-outline btn-primary rounded-full font-bold uppercase text-[10px] tracking-widest">Write a Review</a>
         {% endif %}
       </div>
 
       <!-- Star Breakdown -->
       {% if review_count > 0 %}
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 p-8 bg-slate-950 rounded-[3rem] text-white">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 p-8 bg-primary-gradient rounded-[3rem] text-white reveal reveal-up">
         <div class="text-center space-y-2 flex flex-col items-center justify-center">
           <p class="text-7xl font-black tracking-tighter">{{ product.average_rating }}</p>
           <div class="rating rating-md">
+            {% with avg=product.average_rating|floatformat:"0" %}
             {% for i in "12345" %}
-            <input type="radio" class="mask mask-star-2 bg-amber-400" disabled
-                   {% if forloop.counter == product.average_rating|floatformat:"0"|add:"0" %}checked{% endif %}/>
+            <input type="radio" class="mask mask-star-2 bg-amber-400" disabled {% if forloop.counter|stringformat:"s" == avg %}checked{% endif %} />
             {% endfor %}
+            {% endwith %}
           </div>
-          <p class="text-[10px] font-black opacity-40 uppercase tracking-widest">{{ review_count }} Review{{ review_count|pluralize }}</p>
+          <p class="text-[10px] font-black opacity-40 uppercase tracking-widest">{{ review_count }} Review{{review_count|pluralize }}</p>
         </div>
         <div class="col-span-2 space-y-2 justify-center flex flex-col">
           {% for star, data in star_breakdown.items %}
           <div class="flex items-center gap-3">
             <span class="text-[10px] font-black opacity-40 w-6 shrink-0">{{ star }}★</span>
             <div class="flex-1 bg-white/10 rounded-full h-2 overflow-hidden">
-              <div class="bg-amber-400 h-full rounded-full transition-all rating-bar" data-width="{{ data.percentage }}"></div>
+              <div class="bg-amber-400 h-full rounded-full transition-all rating-bar"
+                data-width="{{ data.percentage }}"></div>
             </div>
             <span class="text-[10px] font-bold opacity-40 w-8 text-right">{{ data.count }}</span>
           </div>
@@ -181,28 +201,35 @@
         </div>
       </div>
       <script>
-        document.querySelectorAll('.rating-bar').forEach(function(el) {
+        document.querySelectorAll('.rating-bar').forEach(function (el) {
           el.style.width = (el.dataset.width || 0) + '%';
         });
       </script>
 
       <!-- Review Cards -->
-      <div class="space-y-6">
+      <div class="space-y-6" id="review-list">
         {% for review in reviews %}
-        <div class="p-8 bg-base-100 rounded-[2.5rem] border border-base-200 space-y-3">
+        <div class="p-8 rounded-[2.5rem] border border-base-200 space-y-3 review-card {% if forloop.counter > 5 %}hidden{% endif %}">
           <div class="flex items-start justify-between gap-4">
             <div class="space-y-1">
               <div class="flex items-center gap-2">
-                <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-black text-sm">{{ review.user.username|first|upper }}</div>
+                {% if review.user.profile.avatar %}
+                <img src="{{ review.user.profile.avatar.url }}" alt="{{ review.user.username }}"
+                  class="w-8 h-8 rounded-full object-cover border-2 border-primary/20" />
+                {% else %}
+                <div
+                  class="w-8 h-8 rounded-full bg-primary-gradient text-white flex items-center justify-center font-black text-sm">
+                  {{ review.user.username|first|upper }}</div>
+                {% endif %}
                 <p class="font-black tracking-tight">{{ review.user.username }}</p>
               </div>
               <div class="rating rating-xs">
                 {% for i in "12345" %}
-                <input type="radio" class="mask mask-star-2 bg-amber-400" disabled {% if forloop.counter == review.rating %}checked{% endif %}/>
+                <input type="radio" class="mask mask-star-2 bg-amber-400" disabled {% if forloop.counter == review.rating %}checked{% endif %} />
                 {% endfor %}
               </div>
             </div>
-            <p class="text-[10px] font-black opacity-30 uppercase tracking-widest shrink-0">{{ review.created_at|date:"M d, Y" }}</p>
+            <p class="text-[10px] font-black opacity-30 uppercase tracking-widest shrink-0">{{ review.created_at|date:"M  , Y" }}</p>
           </div>
           {% if review.title %}<p class="font-extrabold text-lg tracking-tight">{{ review.title }}</p>{% endif %}
           <p class="opacity-60 leading-relaxed text-sm">{{ review.comment }}</p>
@@ -210,60 +237,66 @@
         </div>
         {% endfor %}
       </div>
+      
+      {% if reviews|length > 5 %}
+      <div class="flex justify-center mt-8">
+        <button id="see-more-reviews-btn" class="btn btn-outline btn-primary rounded-full font-bold uppercase text-[10px] tracking-widest px-8">
+          See More Reviews
+        </button>
+      </div>
+      <script>
+        document.getElementById('see-more-reviews-btn').addEventListener('click', function() {
+          const hiddenReviews = document.querySelectorAll('.review-card.hidden');
+          const isExpanding = hiddenReviews.length > 0;
+          
+          if (isExpanding) {
+            hiddenReviews.forEach(card => {
+              card.classList.remove('hidden');
+              card.dataset.toggled = 'true';
+            });
+            this.textContent = 'Show Less';
+          } else {
+            const toggledReviews = document.querySelectorAll('.review-card[data-toggled="true"]');
+            toggledReviews.forEach(card => {
+              card.classList.add('hidden');
+              card.dataset.toggled = 'false';
+            });
+            this.textContent = 'See More Reviews';
+            // Scroll back to the top of the reviews list
+            const reviewTop = document.getElementById('review-list').getBoundingClientRect().top + window.scrollY - 100;
+            window.scrollTo({ top: reviewTop, behavior: 'smooth' });
+          }
+        });
+      </script>
+      {% endif %}
+      
       {% else %}
       <p class="text-center opacity-30 font-bold uppercase tracking-widest py-12">No reviews yet. Be the first!</p>
       {% endif %}
 
       <!-- Write Review Form -->
-      {% if user.is_authenticated and not user_review %}
-      <div id="write-review" class="p-10 rounded-[3rem] border border-base-200 space-y-8">
-        <h3 class="text-2xl font-black uppercase italic">Share Your Experience</h3>
-        <form method="post" action="{% url 'reviews:add_review' product.slug %}" class="space-y-6">
-          {% csrf_token %}
-          <div class="form-control">
-            <label class="label"><span class="label-text font-black uppercase tracking-widest text-[10px]">Rating</span></label>
-            <div class="rating rating-lg gap-1">
-              {% for i in "54321" %}
-              <input type="radio" name="rating" value="{{ i }}" class="mask mask-star-2 bg-amber-400"/>
-              {% endfor %}
-            </div>
-          </div>
-          <div class="form-control">
-            <label class="label"><span class="label-text font-black uppercase tracking-widest text-[10px]">Title</span></label>
-            <input type="text" name="title" maxlength="200" placeholder="Summarize your experience..." class="input input-lg rounded-2xl bg-base-200/50 border-base-300 font-bold focus:border-primary"/>
-          </div>
-          <div class="form-control">
-            <label class="label"><span class="label-text font-black uppercase tracking-widest text-[10px]">Review</span></label>
-            <textarea name="comment" rows="5" placeholder="Describe your experience in detail..." class="textarea textarea-lg rounded-2xl bg-base-200/50 border-base-300 font-bold focus:border-primary" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary btn-lg rounded-2xl font-black uppercase shadow-2xl shadow-primary/20">Submit Review</button>
-        </form>
-      </div>
-      {% elif not user.is_authenticated %}
-      <div class="text-center p-10 rounded-[2.5rem] bg-base-200/50 border border-base-200 space-y-4">
-        <p class="font-bold opacity-50 uppercase tracking-widest text-sm">Login to write a review</p>
-        <a href="{% url 'accounts:login' %}" class="btn btn-primary rounded-full px-12 font-bold uppercase shadow-xl shadow-primary/20">Login</a>
-      </div>
-      {% endif %}
+      <!-- Write Review Form (Removed as user login is disabled) -->
     </section>
 
     <!-- Related Products -->
     {% if related_products %}
     <section class="mt-24 space-y-8">
-      <div class="flex items-center gap-4">
-        <div class="w-1.5 h-10 bg-primary rounded-full"></div>
-        <h2 class="text-3xl font-black tracking-tight uppercase italic">You Might Also Like</h2>
+      <div class="flex items-center gap-4 reveal reveal-up">
+        <div class="w-1.5 h-10 bg-primary-gradient rounded-full"></div>
+        <h2 class="text-2xl md:text-3xl font-black tracking-tight uppercase italic">You Might Also Like</h2>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         {% for p in related_products %}
-        <a href="{{ p.get_absolute_url }}" class="group bg-base-100 border border-base-200 rounded-[2rem] overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all">
+        <a href="{{ p.get_absolute_url }}"
+          class="group border border-base-200 rounded-[2rem] overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all reveal reveal-up delay-{{ forloop.counter|add:1 }}00">
           {% if p.image %}
-          <div class="bg-base-200/50 aspect-square overflow-hidden"><img src="{{ p.image.url }}" alt="{{ p.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform"/></div>
+          <div class="bg-base-200/50 aspect-square overflow-hidden"><img src="{{ p.image.url }}" alt="{{ p.name }}"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform" /></div>
           {% endif %}
           <div class="p-4 space-y-1">
             {% if p.brand %}<p class="text-[9px] font-black uppercase text-primary tracking-widest">{{ p.brand }}</p>{% endif %}
             <p class="font-black text-sm line-clamp-2 leading-tight">{{ p.name }}</p>
-            <p class="font-black text-primary">₹{{ p.price }}</p>
+            <p class="font-black text-base-content">₹{{ p.price }}</p>
           </div>
         </a>
         {% endfor %}

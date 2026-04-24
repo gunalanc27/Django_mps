@@ -9,7 +9,7 @@
 
 {% block content %}
 <!-- Page Header & Progress -->
-<section class="bg-gradient-to-br from-[#7C3AED] via-[#4F46E5] to-[#2563EB] text-white py-20 lg:py-28 relative overflow-hidden">
+<section class="bg-primary-gradient text-white py-20 lg:py-28 relative overflow-hidden">
     <div class="absolute inset-0 opacity-10">
         <div class="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
@@ -49,13 +49,13 @@
     </div>
 </section>
 
-<div class="bg-base-100 min-h-screen py-16">
+<div class="min-h-screen py-16">
     <div class="container mx-auto px-6 max-w-4xl">
         <form id="checkout-form" method="post" action="{% url 'orders:checkout' %}" enctype="multipart/form-data">
             {% csrf_token %}
 
             <!-- Step 1: User Personal / Shipping Details -->
-            <section id="step-1" class="wizard-step bg-white p-8 md:p-14 rounded-[3.5rem] border border-base-200 shadow-2xl space-y-10 animate-in fade-in slide-in-from-right-8 duration-500">
+            <section id="step-1" class="wizard-step bg-base-100 p-8 md:p-14 rounded-[3.5rem] border border-base-200 shadow-2xl space-y-10">
                 <div class="flex items-center gap-4">
                     <div class="w-1.5 h-8 bg-primary rounded-full"></div>
                     <h2 class="text-2xl font-black tracking-tight uppercase">Shipping Details</h2>
@@ -63,40 +63,40 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="form-control">
-                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-slate-500">First Name <span class="text-error">*</span></span></label>
+                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-base-content/60">First Name <span class="text-error">*</span></span></label>
                         <input type="text" name="first_name" id="id_first_name" placeholder="e.g. John" class="input input-bordered h-14 rounded-2xl bg-slate-50 border-slate-200 focus:border-primary text-sm font-bold" required />
                     </div>
                     <div class="form-control">
-                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-slate-500">Last Name <span class="text-error">*</span></span></label>
+                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-base-content/60">Last Name <span class="text-error">*</span></span></label>
                         <input type="text" name="last_name" id="id_last_name" placeholder="e.g. Doe" class="input input-bordered h-14 rounded-2xl bg-slate-50 border-slate-200 focus:border-primary text-sm font-bold" required />
                     </div>
                     <div class="form-control">
-                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-slate-500">Email Address <span class="text-error">*</span></span></label>
+                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-base-content/60">Email Address <span class="text-error">*</span></span></label>
                         <input type="email" name="email" id="id_email" value="{{ user.email }}" placeholder="john@example.com" class="input input-bordered h-14 rounded-2xl bg-slate-50 border-slate-200 focus:border-primary text-sm font-bold" required />
                     </div>
                     <div class="form-control">
-                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-slate-500">Phone Number <span class="text-error">*</span></span></label>
-                        <input type="tel" name="phone" id="id_phone" placeholder="+91 XXXXXXXXXX" class="input input-bordered h-14 rounded-2xl bg-slate-50 border-slate-200 focus:border-primary text-sm font-bold" required />
+                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-base-content/60">Phone Number <span class="text-error">*</span></span></label>
+                        <input type="tel" name="phone" id="id_phone" placeholder="+91 XXXXXXXXXX" class="input input-bordered h-14 rounded-2xl bg-base-200/50 border-base-300 focus:border-primary text-sm font-bold" required />
                     </div>
                     <div class="form-control md:col-span-2">
-                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-slate-500">Street Address <span class="text-error">*</span></span></label>
-                        <textarea name="address" id="id_address" placeholder="House No, Street Name, Area" class="textarea textarea-bordered h-28 rounded-2xl bg-slate-50 border-slate-200 focus:border-primary text-sm font-bold py-4" required></textarea>
+                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-base-content/60">Street Address <span class="text-error">*</span></span></label>
+                        <textarea name="address" id="id_address" placeholder="House No, Street Name, Area" class="textarea textarea-bordered h-28 rounded-2xl bg-base-200/50 border-base-300 focus:border-primary text-sm font-bold py-4" required></textarea>
                     </div>
                     <div class="form-control">
-                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-slate-500">City <span class="text-error">*</span></span></label>
-                        <input type="text" name="city" id="id_city" placeholder="City" class="input input-bordered h-14 rounded-2xl bg-slate-50 border-slate-200 focus:border-primary text-sm font-bold" required />
+                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-base-content/60">City <span class="text-error">*</span></span></label>
+                        <input type="text" name="city" id="id_city" placeholder="City" class="input input-bordered h-14 rounded-2xl bg-base-200/50 border-base-300 focus:border-primary text-sm font-bold" required />
                     </div>
                     <div class="form-control">
-                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-slate-500">State <span class="text-error">*</span></span></label>
-                        <input type="text" name="state" id="id_state" placeholder="State" class="input input-bordered h-14 rounded-2xl bg-slate-50 border-slate-200 focus:border-primary text-sm font-bold" required />
+                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-base-content/60">State <span class="text-error">*</span></span></label>
+                        <input type="text" name="state" id="id_state" placeholder="State" class="input input-bordered h-14 rounded-2xl bg-base-200/50 border-base-300 focus:border-primary text-sm font-bold" required />
                     </div>
                     <div class="form-control">
-                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-slate-500">Postal Code <span class="text-error">*</span></span></label>
-                        <input type="text" name="postal_code" id="id_postal_code" placeholder="Postal Code" class="input input-bordered h-14 rounded-2xl bg-slate-50 border-slate-200 focus:border-primary text-sm font-bold" required />
+                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-base-content/60">Postal Code <span class="text-error">*</span></span></label>
+                        <input type="text" name="postal_code" id="id_postal_code" placeholder="Postal Code" class="input input-bordered h-14 rounded-2xl bg-base-200/50 border-base-300 focus:border-primary text-sm font-bold" required />
                     </div>
                     <div class="form-control">
-                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-slate-500">Country <span class="text-error">*</span></span></label>
-                        <select name="country" id="id_country" class="select select-bordered h-14 rounded-2xl bg-slate-50 border-slate-200 focus:border-primary text-sm font-bold" required>
+                        <label class="label"><span class="label-text font-black text-[10px] uppercase tracking-widest text-base-content/60">Country <span class="text-error">*</span></span></label>
+                        <select name="country" id="id_country" class="select select-bordered h-14 rounded-2xl bg-base-200/50 border-base-300 focus:border-primary text-sm font-bold" required>
                             <option value="India" selected>India</option>
                             <option value="United States">United States</option>
                             <option value="United Kingdom">United Kingdom</option>
@@ -112,7 +112,7 @@
                 </div>
             </section>
 <!-- Step 2: Payment Details (Dynamic QR & Upload) -->
-<section id="step-2" class="wizard-step hidden bg-white p-8 md:p-14 rounded-[3.5rem] border border-base-200 shadow-2xl text-center space-y-10 animate-in fade-in slide-in-from-right-8 duration-500">
+<section id="step-2" class="wizard-step hidden bg-base-100 p-8 md:p-14 rounded-[3.5rem] border border-base-200 shadow-2xl text-center space-y-10">
     
     <div class="flex items-center gap-4 text-left">
         <div class="w-1.5 h-8 bg-primary rounded-full"></div>
@@ -122,16 +122,16 @@
     <div class="max-w-md mx-auto space-y-10">
         
         <!-- UPI Payee Display -->
-        <div class="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-200 space-y-4 text-left relative overflow-hidden">
+        <div class="bg-base-200/50 p-8 rounded-[2.5rem] border border-base-200 space-y-4 text-left relative overflow-hidden">
             <div class="absolute top-0 right-0 p-4 opacity-10">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
             </div>
             <div>
-                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Merchant Name</p>
-                <p class="text-lg font-black text-slate-900">{{ payee_name }}</p>
+                <p class="text-[10px] font-black text-base-content/40 uppercase tracking-widest mb-1">Merchant Name</p>
+                <p class="text-lg font-black text-base-content">{{ payee_name }}</p>
             </div>
             <div>
-                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">UPI ID (VPA)</p>
+                <p class="text-[10px] font-black text-base-content/40 uppercase tracking-widest mb-1">UPI ID (VPA)</p>
                 <div class="flex items-center gap-2">
                     <p id="backend-upi-id" class="text-sm font-bold text-primary">{{ upi_id }}</p>
                     <button type="button" onclick="copyUPI()" class="btn btn-ghost btn-xs rounded-lg hover:bg-primary/10">
@@ -140,8 +140,8 @@
                 </div>
             </div>
             <div class="pt-2">
-                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Payable Amount</p>
-                <p class="text-2xl font-black italic tracking-tighter text-slate-900">₹<span id="payable-amount">{{ cart.get_total_price }}</span></p>
+                <p class="text-[10px] font-black text-base-content/40 uppercase tracking-widest mb-1">Payable Amount</p>
+                <p class="text-2xl font-black italic tracking-tighter text-base-content">₹<span id="payable-amount">{{ cart.get_total_price }}</span></p>
             </div>
         </div>
 
@@ -154,27 +154,27 @@
                         <div id="qrcode"></div>
                     </div>
                 </div>
-                <p class="text-[10px] text-slate-500 font-black uppercase tracking-[0.2em] text-center max-w-[260px]">
+                <p class="text-[10px] text-base-content/50 font-black uppercase tracking-[0.2em] text-center max-w-[260px]">
                     Scan with any UPI app to pay
                 </p>
             </div>
         </div>
 
         <!-- Payment Proof Upload & Preview -->
-        <div class="space-y-8 pt-8 border-t border-slate-200">
+        <div class="space-y-8 pt-8 border-t border-base-200">
             <div class="form-control text-left">
                 <label class="label">
-                    <span class="label-text font-black text-[10px] uppercase tracking-widest text-slate-500">
+                    <span class="label-text font-black text-[10px] uppercase tracking-widest text-base-content/60">
                         Upload Payment Screenshot <span class="text-error">*</span>
                     </span>
                 </label>
                 <input type="file" name="payment_screenshot" id="id_payment_screenshot" 
-                       class="file-input file-input-bordered file-input-primary w-full rounded-2xl bg-slate-50 h-16" 
+                       class="file-input file-input-bordered file-input-primary w-full rounded-2xl bg-base-200/50 h-16" 
                        required accept="image/*" onchange="previewScreenshot(event)" />
             </div>
 
             <!-- Screenshot Preview Area -->
-            <div id="screenshot-preview-container" class="hidden animate-in fade-in zoom-in duration-300">
+            <div id="screenshot-preview-container" class="hidden">
                 <div class="relative max-w-[200px] mx-auto group">
                     <img id="screenshot-preview" src="#" alt="Screenshot Preview" class="rounded-2xl shadow-lg border-4 border-white w-full h-auto" />
                     <button type="button" onclick="clearScreenshot()" class="absolute -top-2 -right-2 w-8 h-8 bg-error text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
@@ -188,13 +188,13 @@
 
             <div class="form-control text-left">
                 <label class="label">
-                    <span class="label-text font-black text-[10px] uppercase tracking-widest text-slate-500">
+                    <span class="label-text font-black text-[10px] uppercase tracking-widest text-base-content/60">
                         UTR / Transaction Number <span class="text-error">*</span>
                     </span>
                 </label>
                 <input type="text" name="utr_number" id="id_utr_number" 
                        placeholder="Enter 12-digit UTR / Reference Number" 
-                       class="input input-bordered h-14 rounded-2xl bg-slate-50 border-slate-200 focus:border-primary text-sm font-bold" required />
+                       class="input input-bordered h-14 rounded-2xl bg-base-200/50 border-base-300 focus:border-primary text-sm font-bold" required />
             </div>
 
             <input type="hidden" name="payment_method" value="upi_qr" />
@@ -218,7 +218,7 @@
 </section>
 
             <!-- Step 3: Order Overview / Review Data -->
-            <section id="step-3" class="wizard-step hidden bg-slate-50 p-8 md:p-14 rounded-[4rem] border border-base-200 shadow-2xl space-y-10 animate-in fade-in slide-in-from-right-8 duration-500">
+            <section id="step-3" class="wizard-step hidden bg-base-100 p-8 md:p-14 rounded-[4rem] border border-base-200 shadow-2xl space-y-10">
                 <div class="flex items-center gap-4">
                     <div class="w-1.5 h-8 bg-primary rounded-full"></div>
                     <h2 class="text-2xl font-black tracking-tight uppercase">Review Your Data</h2>
@@ -231,13 +231,13 @@
                             <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                             </div>
-                            <h3 class="font-black text-xs uppercase tracking-[0.2em] text-slate-400">Shipping Info</h3>
+                            <h3 class="font-black text-xs uppercase tracking-[0.2em] text-base-content/40">Shipping Info</h3>
                         </div>
-                        <div class="bg-white p-6 rounded-3xl border border-slate-200 space-y-3 text-left">
+                        <div class="bg-base-100 p-6 rounded-3xl border border-base-200 space-y-3 text-left">
                             <p class="text-sm font-black italic"><span id="review-first_name"></span> <span id="review-last_name"></span></p>
-                            <p class="text-xs font-bold text-slate-500"><span id="review-email"></span></p>
-                            <p class="text-xs font-bold text-slate-500"><span id="review-phone"></span></p>
-                            <p class="text-xs font-bold text-slate-500 leading-relaxed"><span id="review-address"></span>, <span id="review-city"></span>, <span id="review-state"></span> - <span id="review-postal_code"></span>, <span id="review-country"></span></p>
+                            <p class="text-xs font-bold text-base-content/60"><span id="review-email"></span></p>
+                            <p class="text-xs font-bold text-base-content/60"><span id="review-phone"></span></p>
+                            <p class="text-xs font-bold text-base-content/60 leading-relaxed"><span id="review-address"></span>, <span id="review-city"></span>, <span id="review-state"></span> - <span id="review-postal_code"></span>, <span id="review-country"></span></p>
                         </div>
                     </div>
 
@@ -247,11 +247,11 @@
                             <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
                             </div>
-                            <h3 class="font-black text-xs uppercase tracking-[0.2em] text-slate-400">Payment Info</h3>
+                            <h3 class="font-black text-xs uppercase tracking-[0.2em] text-base-content/40">Payment Info</h3>
                         </div>
-                        <div class="bg-white p-6 rounded-3xl border border-slate-200 space-y-3 text-left">
-                            <p class="text-xs font-black uppercase tracking-widest text-slate-400">Method: <span class="text-slate-900">UPI QR</span></p>
-                            <p class="text-xs font-black uppercase tracking-widest text-slate-400">UTR / TXN ID: <span id="review-utr_number" class="text-primary italic"></span></p>
+                        <div class="bg-base-100 p-6 rounded-3xl border border-base-200 space-y-3 text-left">
+                            <p class="text-xs font-black uppercase tracking-widest text-base-content/40">Method: <span class="text-base-content">UPI QR</span></p>
+                            <p class="text-xs font-black uppercase tracking-widest text-base-content/40">UTR / TXN ID: <span id="review-utr_number" class="text-primary italic"></span></p>
                             <div class="flex items-center gap-2 pt-2 text-success">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                 <span class="text-[9px] font-black uppercase tracking-widest">Screenshot Uploaded</span>
@@ -265,30 +265,30 @@
                             <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
                             </div>
-                            <h3 class="font-black text-xs uppercase tracking-[0.2em] text-slate-400">Order Items</h3>
+                            <h3 class="font-black text-xs uppercase tracking-[0.2em] text-base-content/40">Order Items</h3>
                         </div>
                         <div class="bg-white p-8 rounded-3xl border border-slate-200 divide-y divide-slate-100 text-left">
                             {% for item in cart %}
                             <div class="flex justify-between items-center py-4 first:pt-0 last:pb-0">
                                 <div>
                                     <p class="text-sm font-black uppercase tracking-tight">{{ item.product.name }}</p>
-                                    <p class="text-[9px] font-black text-slate-400 tracking-widest uppercase">Qty: {{ item.quantity }}</p>
+                                    <p class="text-[9px] font-black text-base-content/40 tracking-widest uppercase">Qty: {{ item.quantity }}</p>
                                 </div>
-                                <span class="text-lg font-black italic tracking-tighter text-slate-900">${{ item.total_price }}</span>
+                                <span class="text-lg font-black italic tracking-tighter text-base-content">₹{{ item.total_price }}</span>
                             </div>
                             {% endfor %}
                             <div class="pt-6 flex justify-between items-end">
                                 <div>
-                                    <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Shipping: <span class="text-success">FREE</span></p>
+                                    <p class="text-[9px] font-black text-base-content/40 uppercase tracking-widest">Shipping: <span class="text-success">FREE</span></p>
                                     <p class="text-xl font-black uppercase tracking-tighter mt-1">Total Payable</p>
                                 </div>
-                                <p class="text-4xl font-black tracking-tighter italic text-primary leading-none">${{ cart.get_total_price }}</p>
+                                <p class="text-4xl font-black tracking-tighter italic text-primary leading-none">₹{{ cart.get_total_price }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="pt-10 flex justify-between items-center border-t border-slate-200">
+                <div class="pt-10 flex justify-between items-center border-t border-base-200">
                     <button type="button" onclick="prevStep(2)" class="btn btn-ghost btn-lg rounded-2xl px-8 h-16 font-black uppercase tracking-tight opacity-40 hover:opacity-100">Back</button>
                     <button type="button" onclick="nextStep(4)" class="btn btn-primary btn-lg rounded-2xl px-12 h-16 font-black uppercase tracking-tight shadow-xl shadow-primary/20 group">
                         Next: Confirm
@@ -298,19 +298,19 @@
             </section>
 
             <!-- Step 4: Confirmation / Final Review & Submit -->
-            <section id="step-4" class="wizard-step hidden bg-white p-8 md:p-14 rounded-[3.5rem] border border-primary/20 shadow-2xl shadow-primary/10 text-center space-y-10 animate-in fade-in slide-in-from-right-8 duration-500">
+            <section id="step-4" class="wizard-step hidden bg-base-100 p-8 md:p-14 rounded-[3.5rem] border border-primary/20 shadow-2xl shadow-primary/10 text-center space-y-10">
                 <div class="w-20 h-20 bg-primary/10 rounded-3xl flex items-center justify-center text-primary mx-auto mb-6">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 </div>
                 
                 <h2 class="text-3xl font-black tracking-tight uppercase px-12 leading-tight">One last check to ensure everything is perfect!</h2>
-                <p class="text-sm font-bold text-slate-500 uppercase tracking-widest">By confirming, you finalize your order and agree to our terms.</p>
+                <p class="text-sm font-bold text-base-content/50 uppercase tracking-widest">By confirming, you finalize your order and agree to our terms.</p>
 
                 <div class="max-w-md mx-auto space-y-8 pt-6">
                     <div class="form-control items-center">
                         <label class="label cursor-pointer gap-4 group">
                             <input type="checkbox" id="tos-checkbox" class="checkbox checkbox-primary w-6 h-6 rounded-lg" required />
-                            <span class="text-xs font-bold uppercase tracking-tight text-slate-600 group-hover:text-primary transition-colors text-center leading-relaxed">I have reviewed all the data and it is correct. I agree to the Terms of Service.</span>
+                            <span class="text-xs font-bold uppercase tracking-tight text-base-content/60 group-hover:text-primary transition-colors text-center leading-relaxed">I have reviewed all the data and it is correct. I agree to the Terms of Service.</span>
                         </label>
                     </div>
 

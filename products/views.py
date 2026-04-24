@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
-from django.db.models import Q
+from django.db.models import Q, Count
 from .models import Product, Category, Tag
 from reviews.models import Review
 
@@ -104,11 +104,15 @@ class ProductDetailView(DetailView):
                 product=product, user=self.request.user
             ).first()
 
-        # Related products (same category, excluding this one)
+        # Related products: same category OR shared tags, ranked by tag overlap then rating
+        product_tags = product.tags.all()
         context["related_products"] = (
-            Product.objects.filter(category=product.category, is_active=True)
+            Product.objects.filter(is_active=True)
             .exclude(pk=product.pk)
-            .order_by("-average_rating")[:4]
+            .filter(Q(category=product.category) | Q(tags__in=product_tags))
+            .annotate(shared_tags=Count("tags", filter=Q(tags__in=product_tags)))
+            .order_by("-shared_tags", "-average_rating")
+            .distinct()[:4]
         )
 
         # Specs as a list of (key, value) tuples for template iteration

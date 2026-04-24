@@ -29,7 +29,7 @@ class ProductAdmin(admin.ModelAdmin):
         "is_active", "created_at",
     ]
     list_filter = ["category", "availability_status", "is_active", "brand", "created_at"]
-    list_editable = ["price", "stock_quantity", "availability_status", "is_active"]
+    list_editable = ["price", "stock_quantity", "is_active"]
     prepopulated_fields = {"slug": ("name",)}
     search_fields = ["name", "brand", "sku", "model_number", "short_description"]
     raw_id_fields = ["category"]
@@ -46,6 +46,7 @@ class ProductAdmin(admin.ModelAdmin):
             "fields": ("price", "original_price", "currency")
         }),
         ("Stock & Availability", {
+            "description": "Set stock_quantity. availability_status auto-syncs: 0 → Out of Stock, >0 → In Stock. Set Pre-Order or Discontinued manually to bypass auto-sync.",
             "fields": ("stock_quantity", "availability_status", "is_active")
         }),
         ("Media", {

@@ -138,6 +138,13 @@ class Product(models.Model):
             self.slug = slugify(self.name)
         if not self.sku:
             self.sku = str(uuid.uuid4())[:8].upper()
+        # Auto-sync availability_status with stock_quantity
+        # Only manage In Stock / Out of Stock — leave Pre-Order and Discontinued alone
+        if self.availability_status in ("In Stock", "Out of Stock"):
+            if self.stock_quantity <= 0:
+                self.availability_status = "Out of Stock"
+            else:
+                self.availability_status = "In Stock"
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -161,8 +168,8 @@ class Product(models.Model):
 
     @property
     def is_available(self):
-        """Backward-compatible property."""
-        return self.availability_status == "In Stock" and self.stock_quantity > 0
+        """True only when the product is actively In Stock."""
+        return self.availability_status == "In Stock"
 
     def update_rating(self):
         """Recalculate and save average_rating and review_count from approved reviews."""

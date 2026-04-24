@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 20px auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; }
+        .header { background: #0f172a; color: #ffffff; padding: 30px; text-align: center; }
+        .header h1 { margin: 0; font-size: 24px; letter-spacing: 2px; text-transform: uppercase; font-style: italic; }
+        .header h1 span { color: #3b82f6; } /* Primary color */
+        .content { padding: 30px; background: #fff; }
+        .section-title { font-size: 14px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px; }
+        .field { margin-bottom: 15px; }
+        .label { font-weight: 700; color: #475569; display: block; font-size: 12px; text-transform: uppercase; }
+        .value { color: #1e293b; font-size: 16px; margin-top: 4px; }
+        .message-box { background: #f8fafc; padding: 20px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #3b82f6; }
+        .footer { background: #f1f5f9; color: #64748b; padding: 15px; text-align: center; font-size: 11px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>GPZ <span>STORE</span></h1>
+        </div>
+        <div class="content">
+            <div class="section-title">New Contact Submission</div>
+            
+            <div class="field">
+                <span class="label">From</span>
+                <div class="value">{{ name }} ({{ email }})</div>
+            </div>
+            
+            <div class="field">
+                <span class="label">Subject</span>
+                <div class="value">{{ subject }}</div>
+            </div>
+
+            <div class="message-box">
+                <span class="label">Message</span>
+                <div class="value">{{ message|linebreaks }}</div>
+            </div>
+        </div>
+        <div class="footer">
+            This inquiry was sent from the GPZ Store Contact Form.
+        </div>
+    </div>
+</body>
+</html>

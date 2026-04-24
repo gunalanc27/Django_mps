@@ -5,18 +5,18 @@
 
 {% block content %}
 <!-- Page Header -->
-<section class="bg-gradient-to-br from-[#7C3AED] via-[#4F46E5] to-[#2563EB] text-white py-16 lg:py-20 relative overflow-hidden">
+<section class="bg-primary-gradient text-white py-16 lg:py-20 relative overflow-hidden">
     <div class="absolute inset-0 opacity-10">
         <div class="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
     </div>
-    <div class="container mx-auto px-6 relative z-10 text-center animate-in slide-in-from-bottom duration-700">
-        <h1 class="text-4xl lg:text-5xl font-black mb-4 tracking-tight uppercase">Order History</h1>
+    <div class="container mx-auto px-6 relative z-10 text-center reveal reveal-up">
+        <h1 class="text-4xl lg:text-5xl font-black mb-4 tracking-tight uppercase italic">Order History</h1>
         <p class="text-lg text-white/80 font-medium uppercase tracking-widest text-[10px]">Track your purchases and status</p>
     </div>
 </section>
 
-<section class="py-20 bg-base-100">
+<section class="py-20">
     <div class="container mx-auto px-6">
         {% if not orders %}
         <div class="max-w-2xl mx-auto text-center space-y-8 bg-base-200/50 p-20 rounded-[3rem] border-4 border-dashed border-base-200">
@@ -29,7 +29,7 @@
                 <h2 class="text-3xl font-black tracking-tight">No orders yet</h2>
                 <p class="text-base-content/60 font-medium">You haven't placed any orders in our store.</p>
             </div>
-            <a href="{% url 'products:product_list' %}" class="btn btn-primary btn-lg rounded-full px-12 font-bold uppercase tracking-tight">Explore Products</a>
+            <a href="{% url 'products:product_list' %}" class="btn bg-primary-gradient border-none text-white btn-lg rounded-full px-12 font-bold uppercase tracking-tight">Explore Products</a>
         </div>
         {% else %}
         <div class="max-w-6xl mx-auto space-y-8">
@@ -51,7 +51,7 @@
                     </thead>
                     <tbody class="space-y-4">
                         {% for order in orders %}
-                        <tr class="bg-base-200/30 hover:bg-base-200 transition-colors rounded-[2rem] overflow-hidden">
+                        <tr class="bg-base-200/30 hover:bg-base-200 transition-colors rounded-[2rem] overflow-hidden reveal reveal-up delay-{{ forloop.counter|add:1 }}00">
                             <td class="pl-10 py-8 rounded-l-[2rem] font-black text-xl tracking-tighter">
                                 #{{ order.id }}
                             </td>
@@ -59,7 +59,7 @@
                                 {{ order.created_at|date:"F d, Y" }}
                             </td>
                             <td class="text-center font-black text-xl text-primary tracking-tighter">
-                                ${{ order.total_amount }}
+                            ₹{{ order.total_amount }}
                             </td>
                             <td class="text-center">
                                 <span class="badge badge-lg py-4 px-6 rounded-xl font-bold border-none uppercase tracking-widest text-[10px] 

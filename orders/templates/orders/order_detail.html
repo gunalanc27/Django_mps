@@ -5,24 +5,24 @@
 
 {% block content %}
 <!-- Page Header -->
-<section class="bg-gradient-to-br from-[#7C3AED] via-[#4F46E5] to-[#2563EB] text-white py-16 lg:py-20 relative overflow-hidden">
+<section class="bg-primary-gradient text-white py-16 lg:py-20 relative overflow-hidden">
     <div class="absolute inset-0 opacity-10">
         <div class="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
     </div>
-    <div class="container mx-auto px-6 relative z-10 text-center animate-in slide-in-from-bottom duration-700">
-        <h1 class="text-4xl lg:text-5xl font-black mb-4 tracking-tight uppercase">Order #{{ order.id }}</h1>
+    <div class="container mx-auto px-6 relative z-10 text-center reveal reveal-up">
+        <h1 class="text-4xl lg:text-5xl font-black mb-4 tracking-tight uppercase italic">Order #{{ order.id }}</h1>
         <p class="text-lg text-white/80 font-medium uppercase tracking-widest text-[10px]">Detailed summary and tracking</p>
     </div>
 </section>
 
-<section class="py-20 bg-base-100">
+<section class="py-20">
     <div class="container mx-auto px-6">
         <div class="grid grid-cols-1 xl:grid-cols-12 gap-16">
             <!-- Left Column: Order Items & Address -->
             <div class="xl:col-span-8 space-y-12">
                 <!-- Order Items -->
-                <div class="bg-base-100 p-8 md:p-12 rounded-[3.5rem] border border-base-200 shadow-2xl shadow-base-200/50">
+                <div class=" p-8 md:p-12 rounded-[3.5rem] border border-base-200 shadow-2xl shadow-base-200/50">
                     <div class="flex items-center gap-4 mb-10">
                         <div class="w-12 h-1 bg-primary rounded-full"></div>
                         <h3 class="text-2xl font-black tracking-tight uppercase">Purchased Items</h3>
@@ -44,9 +44,9 @@
                                     <td class="pl-4 py-6 rounded-l-2xl">
                                         <a href="{{ item.product.get_absolute_url }}" class="font-extrabold tracking-tight hover:text-primary transition-colors text-lg">{{ item.product.name }}</a>
                                     </td>
-                                    <td class="text-center font-bold opacity-60">${{ item.price }}</td>
+                                    <td class="text-center font-bold opacity-60">₹{{ item.price }}</td>
                                     <td class="text-center font-black">{{ item.quantity }}</td>
-                                    <td class="text-right pr-4 rounded-r-2xl font-black text-primary tracking-tighter text-xl">${{ item.get_total }}</td>
+                                    <td class="text-right pr-4 rounded-r-2xl font-black text-primary tracking-tighter text-xl">₹{{ item.get_total }}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -56,13 +56,13 @@
                     <div class="mt-10 pt-10 border-t border-base-200 flex justify-end">
                         <div class="text-right space-y-2">
                             <p class="text-[10px] font-black uppercase opacity-40 tracking-widest">Order Amount Paid</p>
-                            <h4 class="text-4xl font-black text-primary tracking-tighter italic">${{ order.total_amount }}</h4>
+                            <h4 class="text-4xl font-black text-primary tracking-tighter italic">₹{{ order.total_amount }}</h4>
                         </div>
                     </div>
                 </div>
 
                 <!-- Shipping Address -->
-                <div class="bg-base-100 p-8 md:p-12 rounded-[3.5rem] border border-base-200 shadow-2xl shadow-base-200/50">
+                <div class=" p-8 md:p-12 rounded-[3.5rem] border border-base-200 shadow-2xl shadow-base-200/50">
                     <div class="flex items-center gap-4 mb-8">
                         <div class="w-12 h-1 bg-primary rounded-full"></div>
                         <h3 class="text-2xl font-black tracking-tight uppercase">Shipping Destination</h3>
@@ -116,7 +116,7 @@
 
             <!-- Right Column: Status & Info -->
             <div class="xl:col-span-4 space-y-10">
-                <div class="bg-slate-950 p-10 rounded-[3rem] text-white shadow-2xl space-y-10 relative overflow-hidden">
+                <div class="bg-primary-gradient p-10 rounded-[3rem] text-white shadow-2xl shadow-primary/30 space-y-10 relative overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent pointer-events-none"></div>
                     
                     <h3 class="text-2xl font-black tracking-tight uppercase relative z-10">Order Metadata</h3>
