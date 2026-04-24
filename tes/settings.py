@@ -98,7 +98,7 @@ import dj_database_url
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASE_URL = os.environ.get("DATABASE_URL")
+DATABASE_URL = os.environ.get("DATABASE_UR")
 
 if DATABASE_URL:
     DATABASES = {
@@ -192,6 +192,8 @@ GOOGLE_SCRIPT_URL = os.environ.get("GOOGLE_SCRIPT_URL", "")
 CART_SESSION_ID = "cart"
 
 TAILWIND_APP_NAME = 'theme'
+
+NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
 INTERNAL_IPS = [
     "127.0.0.1",

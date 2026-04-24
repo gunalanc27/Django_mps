@@ -43,8 +43,8 @@ pip install -r requirements.txt
 tes uses `django-tailwind`. You need to install the Node.js dependencies for the theme:
 
 ```bash
-python manage.py tailwind install
-```
+
+```python manage.py tailwind install
 
 ### 5. Initialize the Database
 
@@ -80,7 +80,7 @@ python manage.py tailwind start
 python manage.py tailwind build
 ```
 
-The application will be available at `http://127.0.0.1:8000/`.
+The application will be available at`http://127.0.0.1:8000/`.
 
 ## Environment Variables
 
