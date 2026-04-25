@@ -24,17 +24,29 @@
     <div class="container mx-auto px-6 reveal reveal-up">
         <div class="flex flex-wrap justify-center gap-12 lg:gap-24">
             <div class="flex items-center gap-4 group reveal reveal-up delay-100">
-                <div class="w-12 h-12 rounded-2xl glass-morphism flex items-center justify-center text-gray-600 group-hover:scale-110 transition-transform">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                <div
+                    class="w-12 h-12 rounded-2xl glass-morphism flex items-center justify-center text-gray-600 group-hover:scale-110 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
                 </div>
                 <div>
                     <p class="text-xs font-black uppercase opacity-40">Avg Response</p>
                     <p class="font-black text-lg tracking-tight">2–4 Hours</p>
                 </div>
             </div>
-                <div class="flex items-center gap-4 group reveal reveal-up delay-200">
-                <div class="w-12 h-12 rounded-2xl bg-base-200/50 flex items-center justify-center text-base-content/60 group-hover:scale-110 transition-transform">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <div class="flex items-center gap-4 group reveal reveal-up delay-200">
+                <div
+                    class="w-12 h-12 rounded-2xl bg-base-200/50 flex items-center justify-center text-base-content/60 group-hover:scale-110 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
                 </div>
                 <div>
                     <p class="text-xs font-black uppercase opacity-40">Community</p>
@@ -42,8 +54,12 @@
                 </div>
             </div>
             <div class="flex items-center gap-4 group reveal reveal-up delay-300">
-                <div class="w-12 h-12 rounded-2xl bg-base-200/50 flex items-center justify-center text-base-content/60 group-hover:scale-110 transition-transform">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                <div
+                    class="w-12 h-12 rounded-2xl bg-base-200/50 flex items-center justify-center text-base-content/60 group-hover:scale-110 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
                 </div>
                 <div>
                     <p class="text-xs font-black uppercase opacity-40">Reliability</p>
@@ -60,46 +76,66 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
             <!-- Contact Form -->
 
-             <!--add the astresk on the required places  and chnage the default white color 
+            <!--add the astresk on the required places  and chnage the default white color 
              form validation   -->
-            <div class="lg:col-span-7  p-8 md:p-12 rounded-[3rem] border border-base-200 shadow-2xl shadow-base-200/50 reveal reveal-left">
+            <div
+                class="lg:col-span-7  p-8 md:p-12 rounded-[3rem] border border-base-200 shadow-2xl shadow-base-200/50 reveal reveal-left">
                 <div class="space-y-4 mb-10">
                     <h2 class="text-3xl font-black tracking-tight">Send us a message</h2>
                     <p class="text-base-content/60 font-medium">We'll get back to you as soon as possible.</p>
                 </div>
-                
+
                 <form method="post" class="space-y-6">
                     {% csrf_token %}
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="form-control w-full">
-                            <label class="label"><span class="label-text font-bold text-[13px] text-base-content/80">Your Name <span class="text-error">*</span></span></label>
-                            <input type="text" name="name" placeholder="John Doe" class="input input-bordered rounded-2xl bg-base-200/40 border-base-200 focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all w-full" required />
+                            <label class="label"><span
+                                    class="label-text font-bold text-[13px] text-base-content/80">Your Name <span
+                                        class="text-error">*</span></span></label>
+                            <input type="text" name="name" placeholder="John Doe"
+                                class="input input-bordered rounded-2xl bg-base-200/40 border-base-200 focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all w-full"
+                                required />
                         </div>
                         <div class="form-control w-full">
-                            <label class="label"><span class="label-text font-bold text-[13px] text-base-content/80">Email Address <span class="text-error">*</span></span></label>
-                            <input type="email" id="emailInput" name="email" placeholder="john@example.com" class="input input-bordered rounded-2xl bg-base-200/40 border-base-200 focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all w-full" required />
+                            <label class="label"><span
+                                    class="label-text font-bold text-[13px] text-base-content/80">Email Address <span
+                                        class="text-error">*</span></span></label>
+                            <input type="email" id="emailInput" name="email" placeholder="john@example.com"
+                                class="input input-bordered rounded-2xl bg-base-200/40 border-base-200 focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all w-full"
+                                required />
                             <label class="label hidden" id="emailError">
-                                <span class="label-text-alt text-error font-medium">Please enter a valid email address</span>
+                                <span class="label-text-alt text-error font-medium">Please enter a valid email
+                                    address</span>
                             </label>
                         </div>
                     </div>
-                    
+
                     <div class="form-control w-full">
-                        <label class="label"><span class="label-text font-bold text-[13px] text-base-content/80">Subject <span class="text-error">*</span></span></label>
-                        <input type="text" name="subject" placeholder="How can we help you today?" class="input input-bordered rounded-2xl bg-base-200/40 border-base-200 focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all w-full" required />
-                    </div> 
-                    
-                    <div class="form-control w-full">
-																								<-- the mandatory issue  -->
-                        <label class="label"><span class="label-text font-bold text-[13px] text-base-content/80">Your Message </span></label>
-                        <textarea name="message" class="textarea textarea-bordered rounded-[2rem] bg-base-200/40 border-base-200 focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all h-48 w-full" placeholder="Tell us more about your inquiry..." required></textarea>
+                        <label class="label"><span class="label-text font-bold text-[13px] text-base-content/80">Subject
+                                <span class="text-error">*</span></span></label>
+                        <input type="text" name="subject" placeholder="How can we help you today?"
+                            class="input input-bordered rounded-2xl bg-base-200/40 border-base-200 focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all w-full"
+                            required />
                     </div>
-                    
+
+                    <div class="form-control w-full">
+                            <label class="label"><span
+                                    class="label-text font-bold text-[13px] text-base-content/80">Your Message
+                                </span></label>
+                            <textarea name="message"
+                                class="textarea textarea-bordered rounded-[2rem] bg-base-200/40 border-base-200 focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all h-48 w-full"
+                                placeholder="Tell us more about your inquiry..." required></textarea>
+                    </div>
+
                     <div class="pt-6 flex flex-col sm:flex-row items-center gap-6">
-                        <button type="submit" id="submitBtn" class="btn bg-primary-gradient border-none text-white btn-lg rounded-full px-12 shadow-xl shadow-primary/20 font-black tracking-tight uppercase group">
+                        <button type="submit" id="submitBtn"
+                            class="btn bg-primary-gradient border-none text-white btn-lg rounded-full px-12 shadow-xl shadow-primary/20 font-black tracking-tight uppercase group">
                             <span>Send Message</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5 group-hover:translate-x-1 transition-transform ml-2" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
                         </button>
                         <p class="text-[12px] text-base-content/40 font-medium max-w-[200px]">
@@ -110,15 +146,19 @@
             </div>
 
             <!-- Contact Info -->
-            <div class="lg:col-span-5 sm:justify-center  space-y-8">
-                <div class="space-y-10">
+            <div class="lg:col-span-5 space-y-8">
+                <div class="space-y-10 text-center md:text-left">
                     <h2 class="text-3xl font-black tracking-tight">Get in Touch</h2>
-                    
+
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:grid-cols-1 reveal reveal-right">
                         <!-- WhatsApp -->
-                        <a href="{{ contact.whatsapp_url }}" target="_blank" class="flex items-start gap-6 group reveal reveal-up delay-100">
-                            <div class="w-14 h-14 rounded-2xl bg-green-500/10 flex items-center justify-center text-green-600 group-hover:bg-green-500 group-hover:text-white transition-all shadow-sm">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-10.6 8.38 8.38 0 0 1 3.8.9L21 3z"></path></svg>
+                        <a href="{{ contact.whatsapp_url }}" target="_blank"
+                            class="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6 group reveal reveal-up delay-100">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-green-500/10 flex items-center justify-center text-green-600 group-hover:bg-green-500 group-hover:text-white transition-all shadow-sm shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+                                </svg>
                             </div>
                             <div class="space-y-1">
                                 <h4 class="text-lg font-black tracking-tight">WhatsApp</h4>
@@ -127,9 +167,17 @@
                         </a>
 
                         <!-- Email -->
-                        <a href="mailto:{{ contact.email }}" class="flex items-start gap-6 group">
-                            <div class="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-600 group-hover:bg-blue-500 group-hover:text-white transition-all shadow-sm">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <a href="mailto:{{ contact.email }}" class="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6 group">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-600 group-hover:bg-blue-500 group-hover:text-white transition-all shadow-sm shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                    </path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
                             </div>
                             <div class="space-y-1">
                                 <h4 class="text-lg font-black tracking-tight">Email Support</h4>
@@ -137,12 +185,18 @@
                             </div>
                         </a>
 
-                          
+
 
                         <!-- Hours -->
-                        <div class="flex items-start gap-6 group">
-                            <div class="w-14 h-14 rounded-2xl bg-yellow-500/10 flex items-center justify-center text-yellow-600 group-hover:bg-yellow-500 group-hover:text-white transition-all shadow-sm">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        <div class="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6 group">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-yellow-500/10 flex items-center justify-center text-yellow-600 group-hover:bg-yellow-500 group-hover:text-white transition-all shadow-sm shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
                             </div>
                             <div class="space-y-1">
                                 <h4 class="text-lg font-black tracking-tight">Working Hours</h4>
@@ -153,21 +207,39 @@
                 </div>
 
                 <!-- Dealership Banner -->
-                <div class="bg-primary-gradient rounded-[2.5rem] p-10 text-white relative overflow-hidden group shadow-2xl shadow-primary/30">
-                    <div class="relative z-10 space-y-6">
-                        <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-primary-content">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 1 4-4h2"></path><circle cx="8" cy="9" r="4"></circle><path d="M3 11V9a7 7 0 0 1 14 0v2"></path></svg>
+                <div
+                    class="bg-primary-gradient rounded-[2.5rem] p-10  relative overflow-hidden group shadow-2xl shadow-primary/30">
+                    <div class="relative z-10 space-y-6 text-white ">
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-primary-content">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 1 4-4h2"></path>
+                                <circle cx="8" cy="9" r="4"></circle>
+                                <path d="M3 11V9a7 7 0 0 1 14 0v2"></path>
+                            </svg>
                         </div>
                         <div class="space-y-2">
-                            <h4 class="text-2xl font-black tracking-tight tracking-tighter uppercase italic">Partner With Us</h4>
-                            <p class="text-white/50 text-sm font-medium leading-relaxed">Expand your horizon with the most trusted life style supplier in South India. Get wholesale access and priority support.</p>
+                            <h4 class="text-2xl text-white  tracking-tight tracking-tighter uppercase italic">Partner
+                                With Us</h4>
+                            <p class="text-white/50 text-sm font-medium leading-relaxed">Expand your horizon with the
+                                most trusted life style supplier in South India. Get wholesale access and priority
+                                support.</p>
                         </div>
-                        <a href="{% url 'core:partnership' %}" class="btn bg-primary-gradient border-none text-white rounded-full px-8 font-black uppercase tracking-tight shadow-lg shadow-gray-500/20">Become a Partner</a>
+                        <a href="{% url 'core:partnership' %}"
+                            class="btn hover:scale-95 transition-all duration-300 bg-secondary-gradient border-none text-green-400 rounded-full px-8 font-black uppercase tracking-tight shadow-lg shadow-gray-500/20">Become
+                            a Partner</a>
                     </div>
                     <!-- Decorative patterns -->
-                    <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-primary/5 rounded-full group-hover:scale-150 transition-transform duration-1000"></div>
+                    <div
+                        class="absolute -right-10 -bottom-10 w-48 h-48 bg-primary/5 rounded-full group-hover:scale-150 transition-transform duration-1000">
+                    </div>
                     <div class="absolute top-4 right-4 opacity-5">
-                        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="50" fill="white"/></svg>
+                        <svg width="100" height="100" viewBox="0 0 100 100" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="50" fill="white" />
+                        </svg>
                     </div>
                 </div>
             </div>
@@ -198,7 +270,7 @@
     const emailError = document.getElementById('emailError');
     const submitBtn = document.getElementById('submitBtn');
 
-    emailInput.addEventListener('input', function() {
+    emailInput.addEventListener('input', function () {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (this.value && !emailPattern.test(this.value)) {
             emailError.classList.remove('hidden');
@@ -210,7 +282,7 @@
     });
 
     // Simple script to show loading state on form submission
-    document.querySelector('form').addEventListener('submit', function() {
+    document.querySelector('form').addEventListener('submit', function () {
         if (!submitBtn.classList.contains('loading')) {
             submitBtn.classList.add('loading');
             submitBtn.querySelector('span').innerText = 'Sending...';
