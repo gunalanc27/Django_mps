@@ -84,6 +84,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages" ,
                 "cart.cart.cart_context" ,
                 "tes.context_processors.theme_colors" ,
+                "core.context_processors.contact_info" ,
             ] ,
         } ,
     } ,
@@ -191,6 +192,18 @@ GOOGLE_SCRIPT_URL = os.environ.get("GOOGLE_SCRIPT_URL", "")
 # django-cloudinary-storage reads CLOUDINARY_URL from the environment automatically
 
 CART_SESSION_ID = "cart"
+
+# ─── Site Contact Information ───────────────────────────────────────────────
+# Single source of truth for contact details used in the footer and contact page.
+# Edit these values to update both places at once.
+SITE_CONTACT = {
+    "phone": os.environ.get("CONTACT_PHONE", "+91 73584 02926"),
+    "email": os.environ.get("CONTACT_EMAIL", "sselectronics2503@gmail.com"),
+    "address": os.environ.get("CONTACT_ADDRESS", "Tamil Nadu, India"),
+    "working_hours": os.environ.get("CONTACT_HOURS", "Mon–Sat: 9 AM – 6 PM"),
+    "whatsapp_url": os.environ.get("CONTACT_WHATSAPP_URL", "https://wa.me/qr/HI63QJ2LKIUWL1"),
+    "instagram_url": os.environ.get("CONTACT_INSTAGRAM_URL", "https://www.instagram.com/sselectronics25?igsh=YzljYTk1ODg3Zg=="),
+}
 
 TAILWIND_APP_NAME = 'theme'
 
