@@ -14,10 +14,20 @@ class ProductListView(ListView):
     def get_queryset(self):
         queryset = Product.objects.filter(is_active=True)
 
-        # Category filter
-        category_slug = self.kwargs.get("category_slug")
-        if category_slug:
-            queryset = queryset.filter(category__slug=category_slug)
+        # Category filter (support both path kwargs and query params for multi-select)
+        category_slugs = []
+        path_category = self.kwargs.get("category_slug")
+        if path_category:
+            category_slugs.append(path_category)
+            
+        param_categories = self.request.GET.getlist("category")
+        if param_categories:
+            category_slugs.extend(param_categories)
+            
+        if category_slugs:
+            queryset = queryset.filter(
+                Q(category__slug__in=category_slugs) | Q(category__parent__slug__in=category_slugs)
+            )
 
         # Tag filter
         tag_slug = self.request.GET.get("tag")
@@ -54,7 +64,7 @@ class ProductListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["categories"] = Category.objects.filter(is_active=True, parent=None)
+        context["categories"] = Category.objects.filter(is_active=True)
         context["all_tags"] = Tag.objects.filter(is_active=True)
         context["brands"] = (
             Product.objects.filter(is_active=True)
@@ -67,6 +77,12 @@ class ProductListView(ListView):
         category_slug = self.kwargs.get("category_slug")
         if category_slug:
             context["current_category"] = get_object_or_404(Category, slug=category_slug)
+
+        category_slugs = []
+        if category_slug:
+            category_slugs.append(category_slug)
+        category_slugs.extend(self.request.GET.getlist("category"))
+        context["selected_category_slugs"] = category_slugs
 
         context["current_tag"] = self.request.GET.get("tag", "")
         context["current_brand"] = self.request.GET.get("brand", "")

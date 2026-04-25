@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Home - GPZ Store{% endblock %}
+{% block title %}Home - SS Electronics{% endblock %}
 
 {% block content %}
 <!-- Hero Section -->
@@ -19,13 +19,12 @@
                 </div>
 
                 <h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
-                    GPZ Store<br />
+                    SS Electronics<br />
                     <span class="text-yellow-300 font-black">Quality For Your Life</span>
                 </h1>
 
                 <p class="text-base md:text-lg lg:text-xl text-white/80 max-w-lg leading-relaxed font-medium">
-                    The ultimate destination for premium gear and lifestyle essentials. From high-end electronics to
-                    everyday quality products, we bring you the best.
+                    Tamil Nadu's trusted destination for Heavy Boss quality audio — trolley woofers, tower speakers, home theaters, plus essential utility gadgets like rechargeable fans and emergency LED lights.
                 </p>
 
                 <div class="flex flex-wrap gap-4 pt-4">
@@ -108,36 +107,6 @@
 </section>
 
 <!-- Category Title -->
-<section class="pb-24 ">
-    <div class="container mx-auto px-6 text-center">
-        <h2 class="text-3xl md:text-5xl font-black tracking-tight mb-6">Shop by Category</h2>
-        <p class="text-base-content/50 text-lg md:text-xl font-medium mb-16">Explore our wide range of curated
-            collections</p>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            {% for category in categories %}
-            <a href="{{ category.get_absolute_url }}"
-                class="group reveal reveal-up delay-{{ forloop.counter|add:1 }}00 relative aspect-[4/3] rounded-[2rem] bg-base-200 flex flex-col items-center justify-center overflow-hidden hover:bg-primary transition-all duration-500 shadow-sm hover:shadow-2xl hover:-translate-y-2">
-                <span
-                    class="text-xl font-black z-10 group-hover:text-primary-content transition-colors duration-300 text-center px-4">{{category.name }}</span>
-                <!-- Background decoration -->
-                <div
-                    class="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent opacity-0 group-hover:opacity-10 transition-opacity">
-                </div>
-                <div
-                    class="absolute -bottom-4 -right-4 w-12 h-12 bg-black/5 rounded-full group-hover:scale-[10] transition-transform duration-700 pointer-events-none">
-                </div>
-            </a>
-            {% empty %}
-            <div
-                class="col-span-full h-48 flex items-center justify-center border-4 border-dashed border-base-200 rounded-[3rem] opacity-40">
-                <span class="text-sm font-bold uppercase tracking-[0.3em] text-base-content/40">Discoveries Coming
-                    Soon</span>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
 
 
 <!-- CTA Section -->
@@ -155,7 +124,7 @@
             <div class="relative z-10 space-y-10 reveal reveal-zoom">
                 <p
                     class="text-xl lg:text-3xl text-white/90 font-bold tracking-tight px-4 max-w-4xl mx-auto leading-relaxed">
-                    Experience excellence with the best-curated lifestyle products in Tamil Nadu
+                    Experience Heavy Boss quality audio and reliable utility electronics — serving Tamil Nadu with the best in sound and gadgets
                 </p>
                 
                 <div class="pt-4">
