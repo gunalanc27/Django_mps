@@ -97,9 +97,9 @@
                     </select>
                 </form>
             </div>
-
+<!-- smobile view issue for the arrangement  -->
             {% if products %}
-            <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
+            <div class="grid grid-cols-2 lg:grid-cols-3 sm:gap-4 gap-3 md:gap-6">
                 {% for product in products %}
                 <article class="bg-base-100 border border-base-200 rounded-2xl sm:rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-base-200/60 hover:-translate-y-1 sm:hover:-translate-y-3 transition-all duration-300 group flex flex-col reveal reveal-up delay-{{ forloop.counter|add:1 }}00">
                     <!-- Image -->
@@ -124,12 +124,12 @@
                     </a>
 
                     <!-- Content -->
-                    <div class="p-3 pl-2 sm:p-6 flex flex-col flex-1 space-y-2 sm:space-y-3">
+                    <div class="p-3 sm:p-5 flex flex-col flex-1 space-y-2 sm:space-y-3">
                         {% if product.brand %}
-                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-primary">{{ product.brand }}</p>
+                        <p class="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] text-primary">{{ product.brand }}</p>
                         {% endif %}
 
-                        <a href="{{ product.get_absolute_url }}" class="font-black text-sm sm:text-lg leading-tight tracking-tight line-clamp-2 hover:text-primary transition-colors">
+                        <a href="{{ product.get_absolute_url }}" class="font-black text-xs sm:text-lg leading-tight tracking-tight line-clamp-2 hover:text-primary transition-colors">
                             {{ product.name }}
                         </a>
 
@@ -141,36 +141,36 @@
                         {% if product.tags.all %}
                         <div class="flex flex-wrap gap-1">
                             {% for tag in product.tags.all|slice:":3" %}
-                            <span class="badge badge-ghost badge-sm rounded-lg font-bold text-[9px] uppercase">{{ tag.name }}</span>
+                            <span class="badge badge-ghost min-h-0 h-4 px-1.5 sm:badge-sm rounded-lg font-bold text-[8px] sm:text-[9px] uppercase">{{ tag.name }}</span>
                             {% endfor %}
                         </div>
                         {% endif %}
 
                         <!-- Rating -->
                         {% if product.review_count > 0 %}
-                        <div class="flex items-center gap-2">
-                            <div class="rating rating-sm">
+                        <div class="flex items-center gap-1 sm:gap-2">
+                            <div class="rating rating-xs sm:rating-sm">
                                 {% for i in "12345" %}
                                 <input type="radio" class="mask mask-star-2 bg-amber-400" disabled
                                        {% if forloop.counter == product.average_rating|floatformat:"0"|add:"0" %}checked{% endif %}/>
                                 {% endfor %}
                             </div>
-                            <span class="text-[10px] font-bold opacity-40 uppercase">{{ product.average_rating }} ({{ product.review_count }})</span>
+                            <span class="text-[9px] sm:text-[10px] font-bold opacity-40 uppercase">{{ product.average_rating }} ({{ product.review_count }})</span>
                         </div>
                         {% endif %}
 
                         <!-- Price & Cart -->
-                        <div class="mt-auto pt-3 flex items-end justify-between gap-2">
+                        <div class="mt-auto pt-2 sm:pt-3 flex flex-col xl:flex-row items-stretch xl:items-end justify-between gap-2 sm:gap-3">
                             <div>
-                                <p class="text-lg sm:text-2xl font-black text-base-content tracking-tighter">₹{{ product.price }}</p>
+                                <p class="text-base sm:text-2xl font-black text-base-content tracking-tighter leading-none">₹{{ product.price }}</p>
                                 {% if product.is_on_sale %}
-                                <p class="text-[10px] sm:text-xs line-through opacity-30 font-medium">₹{{ product.original_price }}</p>
+                                <p class="text-[10px] sm:text-xs line-through opacity-40 font-medium mt-1">₹{{ product.original_price }}</p>
                                 {% endif %}
                             </div>
-                            <form action="{{ product.get_add_to_cart_url }}" method="post">
+                            <form action="{{ product.get_add_to_cart_url }}" method="post" class="w-full xl:w-auto mt-1 sm:mt-0">
                                 {% csrf_token %}
                                 <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="btn bg-primary-gradient border-none text-white btn-xs sm:btn-sm rounded-xl sm:rounded-2xl font-black uppercase tracking-tight shadow-md sm:shadow-lg shadow-primary/20 whitespace-nowrap">
+                                <button type="submit" class="w-full xl:w-auto btn bg-primary-gradient border-none text-white min-h-0 h-8 sm:h-10 px-3 rounded-xl sm:rounded-2xl font-black text-[10px] sm:text-xs uppercase tracking-tight shadow-md sm:shadow-lg shadow-primary/20 whitespace-nowrap">
                                     Add to Cart
                                 </button>
                             </form>
